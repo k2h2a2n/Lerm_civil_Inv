@@ -1,0 +1,56 @@
+.container_kes{
+
+  table{
+      width: 100%;
+      th{
+        font-weight: 500;
+        text-align: left;
+        font-size: 11px;
+      }
+    }
+    tr{
+      display: table-row-group;
+    }
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+      font-size: 11px;
+      padding: 5px;
+      vertical-align: top;
+    }
+    
+    div{
+      padding: 2px 4px;
+      font-size: 11px;
+    }
+}
+
+  .centerText{
+    text-align: center;
+  }
+  .adressField{
+    min-height: 30px;
+  }
+  .halfWidth{
+    width: 50%;
+  }
+  .amountWords{
+    text-align: end;
+  }
+  .decleration{
+    min-height: 55px;
+    line-height: 15px;
+
+  }
+  .termsConditons{
+    div{
+      line-height: 15px;
+    }
+  }
+  .sacgst{
+    display: grid;
+    grid-template-columns: auto auto;
+  }
+  .eoe{
+    position: absolute;bottom: 0;border-top: 1px solid;width: 92%;
+  }

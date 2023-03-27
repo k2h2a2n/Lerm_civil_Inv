@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <template id="kes_custom_invoice">
+    <t t-call="web.html_container">
+      <t t-call="web.internal_layout">
+
+        <div class="container_kes">
+          <table>
+            <tr>
+              <td rowspan="1" colspan="12">
+                <div class="centerText">
+                  <div>
+                    <b>TAX INVOICE</b>
+                  </div>
+                  <div>
+                    <span>(U/S of CGST Act                       <![CDATA[&]]> SGST Acts R. W.Sec of IGST Acts)</span>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td rowspan="4" colspan="6" class="halfWidth">
+                <div>Invoice To</div>
+                <div>KRIDHAN INFRATECH PVT. LTD.</div>
+                <div class="adressField">
+                        215 Atrium, C wing/822, J B Nagar , Andheri ( E ), Mumbai- 400059
+                </div>
+                <div>GST No:27AAHCK0242L1ZI</div>
+                <div>Pan No:AAHCK0242L</div>
+              </td>
+              <td rowspan="4" colspan="6" class="halfWidth">
+                <div>PO No:</div>
+                <div></div>
+              </td>
+            </tr>
+
+            <tr>
+              <td rowspan="1" colspan="6">
+                <div>Project Name :MTHL Worli- Sewri Bridge</div>
+              </td>
+              <td rowspan="1" colspan="6">
+                <div>Customer Reference:</div>
+              </td>
+            </tr>
+
+            <tr>
+              <td rowspan="1" colspan="12">
+                <div>Contact Person : Hiten Darji</div>
+                <div>Contact No .9773100775</div>
+              </td>
+            </tr>
+
+            <tr>
+              <td colspan="1">
+                <div>SR.No</div>
+              </td>
+              <td colspan="3">
+                <div>Test type</div>
+              </td>
+              <td colspan="2">
+                <div>Report No</div>
+              </td>
+              <td colspan="1">
+                <div>Quantity</div>
+              </td>
+              <td colspan="1">
+                <div>Per No.</div>
+              </td>
+              <td colspan="1">
+                <div>Rate (Rs.)</div>
+              </td>
+              <td colspan="3">
+                <div>Amount (Rs.)</div>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="1">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+              </td>
+              <td colspan="3">
+                <div>Coupler Physical Test</div>
+                <div>Coupler Physical Test</div>
+                <div>Coupler Physical Test</div>
+                <div>Coupler Physical Test</div>
+              </td>
+              <td colspan="2">
+                <div>KES/230303380-391</div>
+                <div>KES/230303380-391</div>
+                <div>KES/230303380-391</div>
+                <div>KES/230303380-391</div>
+              </td>
+              <td colspan="1">
+                <div>12</div>
+                <div>4</div>
+                <div>2</div>
+                <div>1</div>
+              </td>
+              <td colspan="1">
+                <div>Per No.</div>
+              </td>
+              <td colspan="1">
+                <div>Rate (Rs.)</div>
+              </td>
+              <td colspan="3">
+                <div>Amount (Rs.)</div>
+              </td>
+            </tr>
+
+            <tr>
+              <td rowspan="1" colspan="12">
+                <div class="amountWords">In Rs: Amount chargeable (in Words)</div>
+              </td>
+            </tr>
+            <tr>
+              <td rowspan="1" colspan="12">
+                <div class="decleration">
+                        I/We certify that our registration under the GST Act, 2017 is in force
+                        on which the supply of goods specified in this Tax Invoice is made by
+                        me/us                   <![CDATA[&]]> the transaction of supply covered by this Tax Invoice had been
+                        effected by me/us                   <![CDATA[&]]> it shall be accounted for the turnover of supplies
+                        while filling return                   <![CDATA[&]]> the due tax if any payable on the supplies had
+                        been paid or shall be paid. Further certified that the particulars
+                        given above are true and correct                   <![CDATA[&]]> the amount indicated represents the
+                        prices actually charged and that there is no flow additional
+                        consideration directly and indirectly from the buyer.
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td colspan="7" class="termsConditons">
+                <div>
+                  <b>Terms                     <![CDATA[&]]> Conditions</b>
+                </div>
+                <div>
+                        1. Any discrepancy about this invoice must be lodged within two days
+                        of presentation
+                </div>
+                <div>
+                        2. Payment should be made by payee's account cheque / cash / NEFT /
+                        RTGS / online transaction.
+                </div>
+                <div>
+                        3. Interest at the rate of 18% per annum will be charged if the bill
+                        is not paid Within the Stipulated time.
+                </div>
+                <div>4. All disputes Subject to Mumbai Jurisdiction only.</div>
+                <div>
+                        5. While making payment please always mention our bill/ invoice No. On
+                        The Back Of Each Cheques / Draft
+                </div>
+              </td>
+              <td colspan="5">
+                <div class="centerText" style="min-height: 80px">
+                  <b>For Knack Engineering Services Pvt. Ltd.</b>
+                </div>
+                <div class="centerText">(Gaurika Malkani)</div>
+                <div class="centerText">Authorized Signatory</div>
+              </td>
+            </tr>
+
+            <tr>
+              <td colspan="6" class="paymentDetails">
+                <div>
+                  <b>Payment Details</b>
+                </div>
+                <div>
+                  <div>
+                    <label
+                            >Favoring <span>:</span> KNACK ENGINEERING SERVICES PRIVATE
+                            LIMITED</label
+                          >
+                  </div>
+                </div>
+                <div>
+                  <div>
+                    <label>Bank Name</label>
+                    <span>:</span>
+                  </div>
+                </div>
+                <div>
+                  <div>
+                    <label>A/C No. </label>
+                    <span>:</span>
+                  </div>
+                </div>
+                <div>
+                  <div>
+                    <label>IFSC CODE</label>
+                    <span>:</span>
+                  </div>
+                </div>
+                <div>
+                  <div>
+                    <label>Branch Name</label>
+                    <span>:</span>
+                  </div>
+                </div>
+                <div class="sacgst">
+                  <div>
+                    <label>SAC Code</label>
+                    <span>:</span>
+                  </div>
+                  <div>
+                    <label>GST No.</label>
+                    <span>:</span>
+                  </div>
+                </div>
+              </td>
+              <td colspan="1" style="vertical-align: middle">
+                <div class="centerText">
+                  <b> MSME REG NO. MH19E0030142 </b>
+                </div>
+              </td>
+              <td colspan="5" style="position: relative;">
+                <div>
+                  <b> Signature : </b>
+                </div>
+                <div>
+                  <b> Receiver's Name : </b>
+                </div>
+                <div>
+                  <b> Mobile No. : </b>
+                </div>
+                <div class="eoe">
+                  <b>
+                              E.                    <![CDATA[&]]> O. E.
+                  </b>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </t>
+
+    </t>
+  </template>
+</odoo>
