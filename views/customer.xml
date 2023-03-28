@@ -17,6 +17,7 @@
                         <field name="projects" nolabel="1" >
                             <tree editable="bottom">
                                 <field name="project_name" />
+                                <field name="closed_boolean" />
                             </tree>
                         </field>
                     </page>
@@ -26,8 +27,22 @@
                         <field name="po_numbers" nolabel="1" >
                             <tree editable="bottom">
                                 <field name="po_number" />
+                                <field name="closed_boolean" />                                
                             </tree>
                         </field>
+                    </page>
+                </xpath>
+                <xpath expr="//page[@name='internal_notes']" position="after">
+                    <page string="Bank Details">
+                        <group style="width:50%;">
+                                <field name="bank_name" />
+                                <field name="ac_no" />
+                                <field name="ifsc_code" />
+                        </group>
+                        <group style="width:50%;">
+                                <field name="branch_name" />
+                                <field name="sac_code" />
+                        </group>
                     </page>
                 </xpath>
             </field>
@@ -41,14 +56,38 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='payment_reference']" position="after">
                     <field name="project_name" attrs="{'readonly':[('partner_id','=',False)]}"/>
-                    <field name='po_number' attrs="{'readonly':[('partner_id','=',False)]}"/>
+                    <!-- <field name='po_number' attrs="{'readonly':[('partner_id','=',False)]}"/> -->
                     <field name='customer_reference'/>
                     <field name='contact_person' attrs="{'readonly':[('partner_id','=',False)]}"/>
 
                 </xpath>
+                <xpath expr="//page[@name='other_info']" position="after">
+                    <page string="PO Number">
+                        <field name="po_number" attrs="{'readonly':[('partner_id','=',False)]}" context="{'default_customer' : partner_id }" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="customer" invisible="1"  />
+                                <field name="po_number" />
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
 
                 <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='product_id']" position="after">
                 <field name="report_no"/>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="account_move_sale_inherited_form" model="ir.ui.view">
+            <field name="name">account.move.sale.inherited.form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="sale.account_invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_shipping_id']" position="replace">
+                     <field name="partner_shipping_id" string="Invoice To"
+                              groups="sale.group_delivery_invoice_address"
+                              attrs="{'invisible': [('move_type', 'not in', ('out_invoice', 'out_refund', 'out_receipt'))]}"/>
                 </xpath>
             </field>
         </record>

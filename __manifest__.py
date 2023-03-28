@@ -4,7 +4,7 @@
  'website': "http://www.esehat.org", 
  'category': 'Uncategorized', 
  'version': '13.0.1', 
- 'depends':['base' , 'contacts','account' , 'web'],
+ 'depends':['base' ,'sale', 'contacts','account' , 'web'],
  'data': [
         'views/customer.xml',
         'report/kes_invoice_action.xml',
