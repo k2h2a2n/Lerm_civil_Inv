@@ -55,10 +55,13 @@
             <field name="inherit_id" ref="account.view_move_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='payment_reference']" position="after">
-                    <field name="project_name" attrs="{'readonly':[('partner_id','=',False)]}"/>
+                    <field name="project_ids" invisible="1" />
+                    <field name="project_name"  domain="[('id', 'in', project_ids)]" />
+                    <!-- <field name="project_name" attrs="{'readonly':[('partner_id','=',False)]}"/> -->
                     <!-- <field name='po_number' attrs="{'readonly':[('partner_id','=',False)]}"/> -->
                     <field name='customer_reference'/>
-                    <field name='contact_person' attrs="{'readonly':[('partner_id','=',False)]}"/>
+                    <field name="contact_person_ids" invisible="1" />
+                    <field name='contact_person' domain="[('id', 'in', contact_person_ids)]"/>
 
                 </xpath>
                 <xpath expr="//page[@name='other_info']" position="after">
@@ -84,10 +87,13 @@
             <field name="model">account.move</field>
             <field name="inherit_id" ref="sale.account_invoice_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='partner_shipping_id']" position="replace">
-                     <field name="partner_shipping_id" string="Invoice To"
-                              groups="sale.group_delivery_invoice_address"
-                              attrs="{'invisible': [('move_type', 'not in', ('out_invoice', 'out_refund', 'out_receipt'))]}"/>
+                
+               
+                <xpath expr="//field[@name='partner_shipping_id']" position="after">
+                    <field name="ids_partner" invisible="1"/>
+                    <field name="invoice_to"  domain="[('id', 'in', ids_partner)]" />
+                    
+                    
                 </xpath>
             </field>
         </record>
