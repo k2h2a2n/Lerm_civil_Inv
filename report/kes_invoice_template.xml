@@ -4,7 +4,7 @@
     <t t-call="web.html_container">
       <t t-call="web.external_layout">
 
-        <div class="container_kes">
+        <div t-foreach="data" t-as="o" class="container_kes">
           <table>
             <tr>
               <td rowspan="1" colspan="12">
@@ -13,7 +13,7 @@
                     <b>TAX INVOICE</b>
                   </div>
                   <div>
-                    <span>(U/S of CGST Act                       <![CDATA[&]]> SGST Acts R. W.Sec of IGST Acts)</span>
+                    <span>(U/S of CGST Act                                                                                                               <![CDATA[&]]> SGST Acts R. W.Sec of IGST Acts)</span>
                   </div>
                 </div>
               </td>
@@ -22,25 +22,48 @@
             <tr>
               <td rowspan="4" colspan="6" class="halfWidth">
                 <div>Invoice To</div>
-                <div>KRIDHAN INFRATECH PVT. LTD.</div>
-                <div class="adressField">
-                        215 Atrium, C wing/822, J B Nagar , Andheri ( E ), Mumbai- 400059
+                <div>
+                  <span t-field="o.partner_id.name"/>
                 </div>
-                <div>GST No:27AAHCK0242L1ZI</div>
-                <div>Pan No:AAHCK0242L</div>
+                <div class="adressField">
+                  <div t-if="o.partner_id.street">
+                    <span t-field="o.partner_id.street"/>
+                  </div>
+                  <div t-if="o.partner_id.street2">
+                    <span t-field="o.partner_id.street2"/>
+                  </div>
+                  <div t-if="o.partner_id.city">
+                    <span t-field="o.partner_id.city"/>
+                    <span t-if="o.partner_id.zip" t-field="o.partner_id.zip"/>
+                  </div>
+                  <div t-if="o.partner_id.state_id">
+                    <span t-field="o.partner_id.state_id"/>
+ ,                    <span t-field="o.partner_id.country_id"/>
+                  </div>
+                </div>
+                <div>GST No:<span t-field="o.partner_id.vat"/>
+                </div>
+                <div>Pan No:<span t-field="o.partner_id.pan_no"/>
+                </div>
               </td>
               <td rowspan="4" colspan="6" class="halfWidth">
-                <div>PO No:</div>
+                <div>PO No: 
+                  <span t-foreach="o.po_number" t-as="p">
+                    <span t-field="p.po_number"/>
+                  </span>
+                </div>
                 <div></div>
               </td>
             </tr>
 
             <tr>
               <td rowspan="1" colspan="6">
-                <div>Project Name :MTHL Worli- Sewri Bridge</div>
+                <div>Project Name :<span t-field="o.project_name"/>
+                </div>
               </td>
               <td rowspan="1" colspan="6">
-                <div>Customer Reference:</div>
+                <div>Customer Reference: <span t-field="o.customer_reference"/>
+                </div>
               </td>
             </tr>
 
@@ -120,11 +143,11 @@
                 <div class="decleration">
                         I/We certify that our registration under the GST Act, 2017 is in force
                         on which the supply of goods specified in this Tax Invoice is made by
-                        me/us                   <![CDATA[&]]> the transaction of supply covered by this Tax Invoice had been
-                        effected by me/us                   <![CDATA[&]]> it shall be accounted for the turnover of supplies
-                        while filling return                   <![CDATA[&]]> the due tax if any payable on the supplies had
+                        me/us                                                                                           <![CDATA[&]]> the transaction of supply covered by this Tax Invoice had been
+                        effected by me/us                                                                                           <![CDATA[&]]> it shall be accounted for the turnover of supplies
+                        while filling return                                                                                           <![CDATA[&]]> the due tax if any payable on the supplies had
                         been paid or shall be paid. Further certified that the particulars
-                        given above are true and correct                   <![CDATA[&]]> the amount indicated represents the
+                        given above are true and correct                                                                                           <![CDATA[&]]> the amount indicated represents the
                         prices actually charged and that there is no flow additional
                         consideration directly and indirectly from the buyer.
                 </div>
@@ -134,7 +157,7 @@
             <tr>
               <td colspan="7" class="termsConditons">
                 <div>
-                  <b>Terms                     <![CDATA[&]]> Conditions</b>
+                  <b>Terms                                                                                                     <![CDATA[&]]> Conditions</b>
                 </div>
                 <div>
                         1. Any discrepancy about this invoice must be lodged within two days
@@ -228,7 +251,7 @@
                 </div>
                 <div class="eoe">
                   <b>
-                              E.                    <![CDATA[&]]> O. E.
+                              E.                                                                                                    <![CDATA[&]]> O. E.
                   </b>
                 </div>
               </td>
