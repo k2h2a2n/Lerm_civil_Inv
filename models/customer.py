@@ -18,7 +18,22 @@ class Customer(models.Model):
     ifsc_code = fields.Char(string="IFSC Code")
     branch_name = fields.Char(string="Branch Name")
     sac_code = fields.Char(string="SAC Code")
+    type = fields.Selection(
+        selection = '_compute_res_type',
+        string='Address Type',
+        default='contact',
+        help="Invoice & Delivery addresses are used in sales orders. Private addresses are only visible by authorized users.")
 
+
+    @api.model
+    def _compute_res_type(self):
+        selection = [
+            ('contact', 'Contact'),
+            ('delivery', 'Delivery Address'),
+            ('other', 'Other Address'),
+            ("private", "Private Address"),
+                    ]
+        return selection
 
 
     # vat = fields.Char(string="GSTIN")
@@ -48,43 +63,69 @@ class CustomerPO(models.Model):
 class AccountMoveInherited(models.Model):
     _inherit = 'account.move'
 
+    customer_parent = fields.Many2one('res.partner',string="Main Customer")
     project_name = fields.Many2one('res.partner.project',string="Project")
     po_number = fields.One2many('account.move.po','account_move_id',string="PO Number")
     customer_reference = fields.Char(string="Customer Reference")
     contact_person = fields.Many2one('res.partner',string="Contact Person")
+    contact_person_ids = fields.Many2many('res.partner',compute='compute_contact_person_ids', string='Partner ID')
+    ids_partner = fields.Many2many('res.partner',compute='compute_ids', string='Partner ID')
+    project_ids = fields.Many2many('res.partner.project',compute='compute_project_ids', string='Projects ID')
+    invoice_to = fields.Many2one('res.partner',string="Invoice To")
 
 
+    @api.depends("partner_id")
+    def compute_ids(self):
+        for rec in self:
+            if rec.partner_id:
+                # _logger.info("Parent ID found")
+                partners = self.env['res.partner'].search([('parent_id', '=', rec.partner_id.id)])
+                rec.ids_partner = partners
 
-    @api.onchange("partner_id")
-    def set_domain_for_project_name(self):
-        if self.partner_id:
-            domain = [('contact_id', '=', self.partner_id.id),('closed_boolean', '=', False)]
-     
-            result = { 
-                        'domain': {'project_name': domain} 
-                    } 
-            return result
+            else:
+                # _logger.info("Partner ID not found")
+                rec.ids_partner = []
+       
     
+
+    @api.depends("partner_id")
+    def compute_project_ids(self):
+        for rec in self:
+            if rec.partner_id:
+                projects = self.env['res.partner.project'].search([('contact_id', '=', rec.partner_id.id),('closed_boolean','=',False)])
+                rec.project_ids = projects
+            else:
+                rec.project_ids = []
+
+    @api.depends("partner_id")
+    def compute_project_ids(self):
+        for rec in self:
+            if rec.partner_id:
+                projects = self.env['res.partner.project'].search([('contact_id', '=', rec.partner_id.id),('closed_boolean','=',False)])
+                rec.project_ids = projects
+            else:
+                rec.project_ids = []
+    
+    @api.depends("partner_id")
+    def compute_contact_person_ids(self):
+         for rec in self:
+            if rec.partner_id:
+                contact_person_ids = self.env['res.partner'].search([('parent_id', '=', rec.partner_id.id),('type','=','contact')])
+                rec.contact_person_ids = contact_person_ids
+            else:
+                rec.contact_person_ids = []
+
+    
+
     # @api.onchange("partner_id")
-    # def set_domain_for_po_number(self):
+    # def set_domain_for_contact_person(self):
     #     if self.partner_id:
-    #         domain = [('contact_id', '=', self.partner_id.id),('closed_boolean', '=', False)]
+    #         domain = [('parent_id', '=', self.partner_id.id),('type', '=', 'contact')]
      
     #         result = { 
-    #                     'domain': {'po_number': domain} 
+    #                     'domain': {'contact_person': domain} 
     #                 } 
     #         return result
-    
-
-    @api.onchange("partner_id")
-    def set_domain_for_contact_person(self):
-        if self.partner_id:
-            domain = [('parent_id', '=', self.partner_id.id),('type', '=', 'contact')]
-     
-            result = { 
-                        'domain': {'contact_person': domain} 
-                    } 
-            return result
 
 class AccountMovePO(models.Model):
     _name = 'account.move.po'
