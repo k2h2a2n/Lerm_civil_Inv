@@ -130,11 +130,11 @@ class AccountMoveInherited(models.Model):
 class AccountMovePO(models.Model):
     _name = 'account.move.po'
 
-    _sql_constraints = [
-        ("unique_po_number",
-         "UNIQUE(po_number)",
-         "PO Number Already Exist"),
-    ]
+    # _sql_constraints = [
+    #     ("unique_po_number",
+    #      "UNIQUE(po_number)",
+    #      "PO Number Already Exist"),
+    # ]
 
     account_move_id = fields.Many2one('account.move',string='Account Move ID')
     customer = fields.Many2one('res.partner',string='Customer')
@@ -166,7 +166,7 @@ class AccountMovePO(models.Model):
                             'domain': {'po_number': domain} 
                         }
 
-            # return result 
+            # return reountsult 
             return result
 
         
