@@ -76,7 +76,7 @@
                 </xpath>
 
                 <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='product_id']" position="after">
-                <field name="report_no"/>
+                <field name="report_no" force_save="1"/>
                 </xpath>
             </field>
         </record>
