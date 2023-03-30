@@ -8,7 +8,9 @@
  'data': [
         'views/customer.xml',
         'report/kes_invoice_action.xml',
-        'report/kes_invoice_template.xml'
+        'report/kes_invoice_template.xml',
+        'security/security.xml',
+        'security/ir.model.access.csv'
     ],
  'assets': {
         'web.report_assets_common': [

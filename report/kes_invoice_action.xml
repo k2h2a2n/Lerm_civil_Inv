@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="kes_invoice" model="ir.actions.report">
-        <field name="name">KES Invoice</field>
+        <field name="name">Tax Invoice</field>
         <field name="model">account.move</field>
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">lerm_civil_inv.kes_custom_invoice</field>

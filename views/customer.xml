@@ -100,9 +100,26 @@
                     <field name="ids_partner" invisible="1"/>
                     <field name="invoice_to"  />
                 </xpath>
-                <xpath expr="//field[@name='invoice_date']" position="after">
-                        <field name="signed_by_ids" invisible="1" />
-                        <field name="signed_by" domain="[('id', 'in', signed_by_ids)]"/>
+                 <!-- <xpath expr="//field[@name='partner_shipping_id']" position="after">
+                    <field name="ids_partner" invisible="1"/>
+                    <field name="invoice_to"  />
+                </xpath> -->
+                <xpath expr="//header/button[4]" position="replace">
+                     <!-- <button name="action_invoice_sent"
+                                type="object"
+                                string="Send"
+                                attrs="{'invisible':['|', '|', ('state', '!=', 'posted'), ('is_move_sent', '=', True), ('move_type', 'not in', ('out_invoice', 'out_refund'))]}"
+                                class="oe_highlight"
+                                data-hotkey="y"/> -->
+                </xpath>
+                <xpath expr="//header/button[3]" position="replace">
+                 <!-- <button name="action_invoice_sent"
+                                type="object"
+                                string="Send"
+                                attrs="{'invisible':['|', '|', ('state', '!=', 'posted'), ('is_move_sent', '=', True), ('move_type', 'not in', ('out_invoice', 'out_refund'))]}"
+                                class="oe_highlight"
+                                data-hotkey="y"/> -->
+                     
                 </xpath>
             </field>
         </record>

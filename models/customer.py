@@ -199,4 +199,4 @@ class AccountMovePO(models.Model):
 
 class AccountMoveLineInherited(models.Model):
     _inherit = 'account.move.line'
-    report_no = fields.Char('Report No', required=True)
+    report_no = fields.Char('Report No')
