@@ -100,10 +100,10 @@
                     <field name="ids_partner" invisible="1"/>
                     <field name="invoice_to"  />
                 </xpath>
-                 <!-- <xpath expr="//field[@name='partner_shipping_id']" position="after">
-                    <field name="ids_partner" invisible="1"/>
-                    <field name="invoice_to"  />
-                </xpath> -->
+                 <xpath expr="//field[@name='invoice_date']" position="after">
+                    <field name="signed_by_ids" invisible="1"/>
+                    <field name="signed_by" domain="[('id', 'in', signed_by_ids)]"  />
+                </xpath>
                 <xpath expr="//header/button[4]" position="replace">
                      <!-- <button name="action_invoice_sent"
                                 type="object"
