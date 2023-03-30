@@ -22,6 +22,9 @@
                         </field>
                     </page>
                 </xpath>
+                <xpath expr="//field[@name='category_id']" position="after">
+                    <field name="msme_reg_no"/>
+                </xpath>
                 <xpath expr="//page[@name='internal_notes']" position="after">
                     <page string="PO Number">
                         <field name="po_numbers" nolabel="1" >
@@ -95,9 +98,11 @@
                
                 <xpath expr="//field[@name='partner_shipping_id']" position="after">
                     <field name="ids_partner" invisible="1"/>
-                    <field name="invoice_to"  domain="[('id', 'in', ids_partner)]" />
-                    
-                    
+                    <field name="invoice_to"  />
+                </xpath>
+                <xpath expr="//field[@name='invoice_date']" position="after">
+                        <field name="signed_by_ids" invisible="1" />
+                        <field name="signed_by" domain="[('id', 'in', signed_by_ids)]"/>
                 </xpath>
             </field>
         </record>

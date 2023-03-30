@@ -8,6 +8,7 @@ class Customer(models.Model):
     _inherit = 'res.partner'
 
     pan_no = fields.Char(string="PAN No")
+    msme_reg_no = fields.Char(string="MSME REG No.")
     consultant = fields.Char(string="Consultant")
     quality_manager = fields.Char(string="Quality Manager")
     quality_manager_no = fields.Char(string="Quality Manager Number")    
@@ -68,10 +69,33 @@ class AccountMoveInherited(models.Model):
     po_number = fields.One2many('account.move.po','account_move_id',string="PO Number")
     customer_reference = fields.Char(string="Customer Reference")
     contact_person = fields.Many2one('res.partner',string="Contact Person")
-    contact_person_ids = fields.Many2many('res.partner',compute='compute_contact_person_ids', string='Partner ID')
+    contact_person_ids = fields.Many2many('res.partner',compute='compute_contact_person_ids',string='Partner ID')
     ids_partner = fields.Many2many('res.partner',compute='compute_ids', string='Partner ID')
     project_ids = fields.Many2many('res.partner.project',compute='compute_project_ids', string='Projects ID')
-    invoice_to = fields.Many2one('res.partner',string="Invoice To")
+    invoice_to = fields.Many2one('res.partner', inverse="inverse_invoice_to" ,compute='compute_invoice_to',string="Invoice To" )
+    signed_by_ids= fields.Many2many('res.partner',compute='compute_signed_by_ids', string='Signed By IDS')
+    signed_by = fields.Many2one('res.partner', string='Signed By')
+
+    @api.depends("partner_id")
+    def compute_signed_by_ids(self):
+        for rec in self:
+            contact_id = self.env.ref('base.main_partner').id
+            signed_by_ids = self.env['res.partner'].search([('parent_id', '=', contact_id),('type','=','contact')])
+            rec.signed_by_ids = signed_by_ids
+
+
+
+    @api.depends("partner_id")
+    def compute_invoice_to(self):
+        for rec in self:
+            if rec.partner_id:
+                rec.invoice_to = rec.partner_id
+    
+    @api.depends("partner_id")
+    def inverse_invoice_to(self):
+        for rec in self:
+            pass
+
 
 
     @api.depends("partner_id")
@@ -130,11 +154,6 @@ class AccountMoveInherited(models.Model):
 class AccountMovePO(models.Model):
     _name = 'account.move.po'
 
-    # _sql_constraints = [
-    #     ("unique_po_number",
-    #      "UNIQUE(po_number)",
-    #      "PO Number Already Exist"),
-    # ]
 
     account_move_id = fields.Many2one('account.move',string='Account Move ID')
     customer = fields.Many2one('res.partner',string='Customer')
