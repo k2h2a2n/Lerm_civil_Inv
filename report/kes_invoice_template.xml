@@ -286,11 +286,9 @@
                 </div>
                 <div t-foreach="request.env.ref('base.main_partner')" t-as="c">
                   <div>
-                    <label
-                            >Favoring <span>:</span><![CDATA[&nbsp;]]>
+                    <label>Favoring <span>:</span><![CDATA[&nbsp;]]>
                       <span t-field="c.name"/>
-                    </label
-                          >
+                    </label>
                   </div>
                 </div>
                 <div>
