@@ -8,9 +8,9 @@
         font-size: 11px;
       }
     }
-    tr{
-      display: table-row-group;
-    }
+    // tr{
+    //   display: table-row-group;
+    // }
     table, th, td {
       border: 1px solid black;
       border-collapse: collapse;
@@ -35,7 +35,7 @@
     width: 50%;
   }
   .amountWords{
-    text-align: end;
+    text-align: end !important;
   }
   .decleration{
     min-height: 55px;
@@ -53,4 +53,18 @@
   }
   .eoe{
     position: absolute;bottom: 0;border-top: 1px solid;width: 92%;
+  }
+  .dataTable{
+    table{
+      width:100% !important
+    }
+    tr{
+      width:100%
+    }
+  }
+
+  .flexspacebetween{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }

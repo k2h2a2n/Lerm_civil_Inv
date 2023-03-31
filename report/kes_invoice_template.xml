@@ -12,21 +12,21 @@
                     <b>TAX INVOICE</b>
                   </div>
                   <div>
-                    <span>(U/S of CGST Act                                                                                                                                                                                                                                              <![CDATA[&]]> SGST Acts R. W.Sec of IGST Acts)</span>
+                    <span>(U/S of CGST Act                                                                                                                                                                                                                                                                                          <![CDATA[&]]> SGST Acts R. W.Sec of IGST Acts)</span>
                   </div>
                 </div>
               </td>
             </tr>
             <tr>
-              <td colspan="6">Invoice No :                                <![CDATA[&nbsp;]]>
+              <td colspan="6">Invoice No :                                                                <![CDATA[&nbsp;]]>
                 <span t-field="o.name"/>
               </td>
-              <td colspan="6"> Invoice Date :                                <![CDATA[&nbsp;]]>
+              <td colspan="6"> Invoice Date :                                                                <![CDATA[&nbsp;]]>
                 <span t-field="o.invoice_date"/>
               </td>
             </tr>
             <tr>
-              <td rowspan="4" colspan="6" class="halfWidth">
+              <td colspan="6" class="halfWidth">
                 <div>Invoice To</div>
                 <div>
                   <span t-field="o.invoice_to"/>
@@ -47,18 +47,18 @@
  ,                    <span t-field="o.invoice_to.country_id"/>
                   </div>
                 </div>
-                <div>GST No                                                                                                              <![CDATA[&nbsp;]]>:                                                                                                             <![CDATA[&nbsp;]]>
+                <div>GST No                                                                                                                                                  <![CDATA[&nbsp;]]>:                                                                                                                                                 <![CDATA[&nbsp;]]>
                   <span t-field="o.partner_id.vat"/>
                 </div>
-                <div>Pan No                                                                                                             <![CDATA[&nbsp;]]>:                                                                                                             <![CDATA[&nbsp;]]>
+                <div>Pan No                                                                                                                                                 <![CDATA[&nbsp;]]>:                                                                                                                                                 <![CDATA[&nbsp;]]>
                   <span t-field="o.invoice_to.pan_no"/>
                 </div>
               </td>
-              <td rowspan="4" colspan="6" class="halfWidth">
-                <div>PO No                                                                                                             <![CDATA[&nbsp;]]> :                                                                                                             <![CDATA[&nbsp;]]><![CDATA[&nbsp;]]>
+              <td colspan="6" class="halfWidth">
+                <div>PO No                                                                                                                                                 <![CDATA[&nbsp;]]> :                                                                                                                                                 <![CDATA[&nbsp;]]><![CDATA[&nbsp;]]>
                   <span t-foreach="o.po_number[:-1]" t-as="p">
                     <span t-field="p.po_number"/>
-                    <span t-if="o.po_number and len(o.po_number) &gt; 1"><![CDATA[&nbsp;]]> ,                                                                                                                                     <![CDATA[&nbsp;]]></span>
+                    <span t-if="o.po_number and len(o.po_number) &gt; 1"><![CDATA[&nbsp;]]> ,                                                                                                                                                                                 <![CDATA[&nbsp;]]></span>
                   </span>
                   <span t-if="o.po_number" t-esc="o.po_number[-1].po_number.po_number"/>
                 </div>
@@ -66,7 +66,7 @@
             </tr>
             <tr>
               <td rowspan="1" colspan="12">
-                <div>Customer                                                                                           <![CDATA[&nbsp;]]>:                                                                                          <![CDATA[&nbsp;]]>
+                <div>Customer                                                                                                                               <![CDATA[&nbsp;]]>:                                                                                                                              <![CDATA[&nbsp;]]>
                   <span t-field="o.partner_id.name"/>
                 </div>
                 <div>
@@ -88,122 +88,143 @@
                 </div>
                 <div>
                   <span t-field="o.partner_id.state_id"/>
- , 
+, 
                   <span t-field="o.partner_id.country_id"/>
                 </div>
               </td>
             </tr>
             <tr>
               <td rowspan="1" colspan="6">
-                <div>Contact Person                                                                                           <![CDATA[&nbsp;]]>:                                                                                          <![CDATA[&nbsp;]]>
+                <div>Contact Person                                                                                                                               <![CDATA[&nbsp;]]>:                                                                                                                              <![CDATA[&nbsp;]]>
                   <span t-field="o.contact_person"/>
                 </div>
-                <div>Contact No                                                                                           <![CDATA[&nbsp;]]>:                                                                                          <![CDATA[&nbsp;]]>
+                <div>Contact No                                                                                                                               <![CDATA[&nbsp;]]>:                                                                                                                              <![CDATA[&nbsp;]]>
                   <span t-field="o.contact_person.phone"/>
                 </div>
               </td>
               <td rowspan="1" colspan="6">
-                <div>Customer Reference                                                                                           <![CDATA[&nbsp;]]>:                                                                                          <![CDATA[&nbsp;]]>
+                <div>Customer Reference                                                                                                                               <![CDATA[&nbsp;]]>:                                                                                                                              <![CDATA[&nbsp;]]>
                   <span t-field="o.customer_reference"/>
                 </div>
               </td>
             </tr>
 
             <tr>
-              <td rowspan="3" colspan="12">
-                <div>Project Name                                                                                           <![CDATA[&nbsp;]]> :                                                                                           <![CDATA[&nbsp;]]>
+              <td colspan="12">
+                <div>Project Name                                                                                                                               <![CDATA[&nbsp;]]> :                                                                                                                               <![CDATA[&nbsp;]]>
                   <span t-field="o.project_name"/>
                 </div>
               </td>
             </tr>
             <tr>
-              <td colspan="1">
-                <div>SR.No</div>
-              </td>
-              <td colspan="3">
-                <div>Description of Goods</div>
-              </td>
-              <td colspan="2">
-                <div>Report No</div>
-              </td>
-              <td colspan="1">
-                <div>Quantity</div>
-              </td>
-              <td colspan="1">
-                <div>Per No.</div>
-              </td>
-              <td colspan="1">
-                <div>Rate (Rs.)</div>
-              </td>
-              <td colspan="3">
-                <div>Amount (Rs.)</div>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="1">
-                <div t-foreach="o.invoice_line_ids" t-as="productline">
-                  <span t-esc="productline_index + 1" />
-                </div>
-              </td>
-              <td colspan="3">
-                <div t-foreach="o.invoice_line_ids" t-as="productline">
-                  <span t-field="productline.product_id"/>
-                </div>
-              </td>
-              <td colspan="2">
-                <div t-foreach="o.invoice_line_ids" t-as="productline">
-                  <span t-field="productline.report_no"/>
-                </div>
-              </td>
-              <td colspan="1">
-                <div t-foreach="o.invoice_line_ids" t-as="productline">
-                  <span t-field="productline.quantity"/>
-                </div>
-              </td>
-              <td colspan="1">
-                <div>
-                  <span t-field="productline.product_uom_id"/>
-                </div>
-              </td>
-              <td colspan="1">
-                <div t-foreach="o.invoice_line_ids" t-as="productline">
-                  <span t-field="productline.tax_ids"/>
-                </div>
-              </td>
-              <td colspan="3">
-                <div t-foreach="o.invoice_line_ids" t-as="productline">
-                  <span t-field="productline.price_subtotal"/>
-                </div>
+              <td colspan="12">
+                <table>
+                  <tr>
+                    <th>
+                      <div>SR.No</div>
+                    </th>
+                    <th>
+                      <div>Test type</div>
+                    </th>
+                    <th>
+                      <div>Report No</div>
+                    </th>
+                    <th>
+                      <div>Quantity</div>
+                    </th>
+                    <th>
+                      <div>Per No.</div>
+                    </th>
+                    <th>
+                      <div>Rate (Rs.)</div>
+                    </th>
+                    <th>
+                      <div>Amount (Rs.)</div>
+                    </th>
+                  </tr>
+                  <tr>
+                    <td >
+                      <div t-foreach="o.invoice_line_ids" t-as="productline">
+                        <span t-esc="productline_index + 1" />
+                      </div>
+                    </td>
+                    <td>
+                      <div t-foreach="o.invoice_line_ids" t-as="productline">
+                        <span t-field="productline.product_id"/>
+                      </div>
+                    </td>
+                    <td >
+                      <div t-foreach="o.invoice_line_ids" t-as="productline">
+                        <span t-field="productline.report_no"/>
+                      </div>
+                    </td>
+                    <td >
+                      <div t-foreach="o.invoice_line_ids" t-as="productline">
+                        <span t-field="productline.quantity"/>
+                      </div>
+                    </td>
+                    <td >
+                      <div>
+                        <span t-field="productline.product_uom_id"/>
+                      </div>
+                    </td>
+                    <td >
+                      <div t-foreach="o.invoice_line_ids" t-as="productline">
+                        <span t-field="productline.tax_ids"/>
+                      </div>
+                    </td>
+                    <td >
+                      <div t-foreach="o.invoice_line_ids" t-as="productline">
+                        <span t-field="productline.price_subtotal"/>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
               </td>
             </tr>
 
             <tr>
               <td rowspan="1" colspan="12">
-                <div class="amountWords">Untaxed Amount :                                                                         <![CDATA[&nbsp;]]>
+                <div class="amountWords">Untaxed Amount :                                                                                                             <![CDATA[&nbsp;]]>
                   <b>
                     <span t-esc="report_data['tax_totals']['formatted_amount_untaxed']"/>
                   </b>
                 </div>
-                <div class="amountWords">SGST :                                                                         <![CDATA[&nbsp;]]>
+                <div class="amountWords">SGST :                                                                                                             <![CDATA[&nbsp;]]>
                   <b>
                     <span t-esc="report_data['tax_totals']['groups_by_subtotal']['Untaxed Amount'][0]['formatted_tax_group_amount']"/>
                   </b>
                 </div>
-                <div class="amountWords">CGST :                                                                         <![CDATA[&nbsp;]]>
+                <div class="amountWords">CGST :                                                                                                             <![CDATA[&nbsp;]]>
                   <b>
                     <span t-esc="report_data['tax_totals']['groups_by_subtotal']['Untaxed Amount'][1]['formatted_tax_group_amount']"/>
                   </b>
                 </div>
-                <div class="amountWords">Amount chargeable :                                                                         <![CDATA[&nbsp;]]>
+                <div class="amountWords">Amount chargeable :                                                                                                             <![CDATA[&nbsp;]]>
                   <b>
                     <span t-esc="report_data['tax_totals']['formatted_amount_total']"/>
                   </b>
                 </div>
-                <div class="amountWords">Amount chargeable (in Words) :                                                                          <![CDATA[&nbsp;]]>
+                <!-- <div class="amountWords">Amount chargeable (in Words) :                                                                                                              <![CDATA[&nbsp;]]>
+                  <b>
+                    <span t-esc="data.currency_id.amount_to_text(report_data['tax_totals']['amount_total'])"/>
+                  </b>
+                </div> -->
+              </td>
+            </tr>
+
+            <tr>
+              <td rowspan="1" colspan="12">
+              <div>
+                <div style="text-align:start">
+                  Amount chargeable (in Words) :
+                </div>
+                 <div class="amountWords">                                                                                                              <![CDATA[&nbsp;]]>
                   <b>
                     <span t-esc="data.currency_id.amount_to_text(report_data['tax_totals']['amount_total'])"/>
                   </b>
                 </div>
+              </div>
               </td>
             </tr>
             <tr>
@@ -211,11 +232,11 @@
                 <div class="decleration">
                         I/We certify that our registration under the GST Act, 2017 is in force
                         on which the supply of goods specified in this Tax Invoice is made by
-                        me/us                                                                                                                                                                                                       <![CDATA[&]]> the transaction of supply covered by this Tax Invoice had been
-                        effected by me/us                                                                                                                                                                                                       <![CDATA[&]]> it shall be accounted for the turnover of supplies
-                        while filling return                                                                                                                                                                                                       <![CDATA[&]]> the due tax if any payable on the supplies had
+                        me/us                                                                                                                                                                                                                                           <![CDATA[&]]> the transaction of supply covered by this Tax Invoice had been
+                        effected by me/us                                                                                                                                                                                                                                           <![CDATA[&]]> it shall be accounted for the turnover of supplies
+                        while filling return                                                                                                                                                                                                                                           <![CDATA[&]]> the due tax if any payable on the supplies had
                         been paid or shall be paid. Further certified that the particulars
-                        given above are true and correct                                                                                                                                                                                                       <![CDATA[&]]> the amount indicated represents the
+                        given above are true and correct                                                                                                                                                                                                                                           <![CDATA[&]]> the amount indicated represents the
                         prices actually charged and that there is no flow additional
                         consideration directly and indirectly from the buyer.
                 </div>
@@ -223,9 +244,9 @@
             </tr>
 
             <tr>
-              <td colspan="7" class="termsConditons">
+              <td colspan="6" class="termsConditons">
                 <div>
-                  <b>Terms                                                                                                                                                                                                                             <![CDATA[&]]> Conditions</b>
+                  <b>Terms                                                                                                                                                                                                                                                                     <![CDATA[&]]> Conditions</b>
                 </div>
                 <div>
                         1. Any discrepancy about this invoice must be lodged within two days
@@ -245,9 +266,9 @@
                         The Back Of Each Cheques / Draft
                 </div>
               </td>
-              <td colspan="5">
+              <td colspan="6">
                 <div t-foreach="request.env.ref('base.main_partner')" t-as="c" class="centerText" style="min-height: 80px">
-                  <b>For                                         <![CDATA[&nbsp;]]>
+                  <b>For                                                                                 <![CDATA[&nbsp;]]>
                     <span t-field="c.name"/>
                   </b>
                 </div>
@@ -317,26 +338,26 @@
                   </div>
                 </div>
               </td>
-              <td colspan="1" style="vertical-align: middle">
+              <td style="vertical-align: middle">
                 <div class="centerText">
-                  <b> MSME REG NO. :                                                             <![CDATA[&nbsp;]]>
+                  <b> MSME REG NO. :                                                                                                     <![CDATA[&nbsp;]]>
                     <span t-field="c.msme_reg_no"/>
                   </b>
                 </div>
               </td>
-              <td colspan="5" style="position: relative;">
-                <div>
-                  <b> Signature : </b>
+              <td style="position: relative;">
+                <div style="min-height:60px">
+                  <b> Signature </b>
                 </div>
-                <div>
-                  <b> Receiver's Name : </b>
+                <div style="min-height:60px">
+                  <b> Receiver's Name </b>
                 </div>
-                <div>
-                  <b> Mobile No. : </b>
+                <div style="min-height:60px">
+                  <b> Mobile No. </b>
                 </div>
                 <div class="eoe">
                   <b>
-                              E.                                                                                                                                                                                                                            <![CDATA[&]]> O. E.
+                    E.                    <![CDATA[&]]> O. E.
                   </b>
                 </div>
               </td>
@@ -344,7 +365,6 @@
           </table>
         </div>
       </t>
-
     </t>
   </template>
-</odoo>
+</odoo> 
