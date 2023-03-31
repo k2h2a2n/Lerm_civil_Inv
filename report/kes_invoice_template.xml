@@ -274,7 +274,7 @@
                     <span t-field="c.name"/>
                   </b>
                 </div>
-                <div class="centerText">(                  <span t-field="o.signed_by"/>
+                <div class="centerText">(                  <span t-field="o.signed_by.name"/>
 )</div>
                 <div class="centerText">Authorized Signatory</div>
               </td>
