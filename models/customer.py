@@ -1,4 +1,5 @@
 from odoo import models, fields ,api
+import base64
 
 import logging
 
@@ -82,6 +83,44 @@ class AccountMoveInherited(models.Model):
             contact_id = self.env.ref('base.main_partner').id
             signed_by_ids = self.env['res.partner'].search([('parent_id', '=', contact_id),('type','=','contact')])
             rec.signed_by_ids = signed_by_ids
+
+
+    def action_invoice_sent_mail(self):
+        
+        invoice_report_id = self.env.ref('lerm_civil_inv.kes_invoice')
+        generated_report = invoice_report_id._render_qweb_pdf(self.id)
+        data_record = base64.b64encode(generated_report[0])
+    
+        ir_values = {
+            'name': 'Invoice Report',
+            'type': 'binary',
+            'datas': data_record,
+            'store_fname': data_record,
+            'mimetype': 'application/pdf',
+            'res_model': 'account.move',
+            }
+        report_attachment = self.env['ir.attachment'].sudo().create(ir_values)
+        _logger.info(report_attachment)
+
+        ctx = {
+            'default_model': 'account.move',
+            'default_res_id': self.ids[0],
+            'default_composition_mode': 'comment',
+            'mark_so_as_sent': True,
+            'default_attachment_ids': [report_attachment.id],
+            'default_partner_ids': [self.partner_id.id]
+        }
+
+
+        return {
+            'type': 'ir.actions.act_window',
+            'view_mode': 'form',
+            'res_model': 'mail.compose.message',
+            'views': [(False, 'form')],
+            'view_id': False,
+            'target': 'new',
+            'context': ctx
+        }
 
 
 
