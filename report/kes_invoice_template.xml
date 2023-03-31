@@ -142,24 +142,26 @@
                       <div>Amount (Rs.)</div>
                     </th>
                   </tr>
-                  <tr>
+
+
+                  <tr t-foreach="o.invoice_line_ids" t-as="productline">
                     <td >
-                      <div t-foreach="o.invoice_line_ids" t-as="productline">
+                      <div>
                         <span t-esc="productline_index + 1" />
                       </div>
                     </td>
                     <td>
-                      <div t-foreach="o.invoice_line_ids" t-as="productline">
+                      <div>
                         <span t-field="productline.product_id"/>
                       </div>
                     </td>
                     <td >
-                      <div t-foreach="o.invoice_line_ids" t-as="productline">
+                      <div>
                         <span t-field="productline.report_no"/>
                       </div>
                     </td>
                     <td >
-                      <div t-foreach="o.invoice_line_ids" t-as="productline">
+                      <div>
                         <span t-field="productline.quantity"/>
                       </div>
                     </td>
@@ -169,12 +171,12 @@
                       </div>
                     </td>
                     <td >
-                      <div t-foreach="o.invoice_line_ids" t-as="productline">
+                      <div>
                         <span t-field="productline.tax_ids"/>
                       </div>
                     </td>
                     <td >
-                      <div t-foreach="o.invoice_line_ids" t-as="productline">
+                      <div>
                         <span t-field="productline.price_subtotal"/>
                       </div>
                     </td>
