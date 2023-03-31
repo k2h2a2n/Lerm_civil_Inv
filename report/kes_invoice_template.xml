@@ -99,7 +99,7 @@
                   <span t-field="o.contact_person"/>
                 </div>
                 <div>Contact No                                                                                                                               <![CDATA[&nbsp;]]>:                                                                                                                              <![CDATA[&nbsp;]]>
-                  <span t-field="o.contact_person.phone"/>
+                  <span t-field="o.contact_person.phone"/> , <span t-field="o.contact_person.mobile"/>
                 </div>
               </td>
               <td rowspan="1" colspan="6">
@@ -116,6 +116,8 @@
                 </div>
               </td>
             </tr>
+           </table>
+          
             <tr>
               <td colspan="12">
                 <table>
@@ -142,8 +144,6 @@
                       <div>Amount (Rs.)</div>
                     </th>
                   </tr>
-
-
                   <tr t-foreach="o.invoice_line_ids" t-as="productline">
                     <td >
                       <div>
@@ -184,7 +184,7 @@
                 </table>
               </td>
             </tr>
-
+           <table>
             <tr>
               <td rowspan="1" colspan="12">
                 <div class="amountWords">Untaxed Amount :                                                                                                             <![CDATA[&nbsp;]]>
