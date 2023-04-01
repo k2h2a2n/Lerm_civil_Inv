@@ -175,7 +175,7 @@
                   </td>
                   <td >
                     <div>
-                      <span t-field="productline.tax_ids"/>
+                      <span t-field="productline.price_unit"/>
                     </div>
                   </td>
                   <td >
@@ -214,7 +214,7 @@
             </tr>
             <tr>
               <td rowspan="1" colspan="12">
-                  <div class="amountWords"> Amount chargeable (in Words) :<![CDATA[&nbsp;]]>
+                  <div class="amountWords"> Amount chargeable in INR (in words) :<![CDATA[&nbsp;]]>
                     <b>
                       <span t-esc="data.currency_id.amount_to_text(report_data['tax_totals']['amount_total'])"/>
                     </b>
