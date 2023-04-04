@@ -1,7 +1,9 @@
 from odoo import models, fields ,api
 import base64
-
+from datetime import datetime , date
 import logging
+from odoo.exceptions import RedirectWarning, UserError, ValidationError, AccessError
+
 
 _logger = logging.getLogger(__name__)
 
@@ -64,7 +66,9 @@ class CustomerPO(models.Model):
 
 class AccountMoveInherited(models.Model):
     _inherit = 'account.move'
-
+    
+    
+    invoice_date = fields.Date(string='Invoice/Bill Date',default=datetime.today(), readonly=True, index=True, copy=False,states={'draft': [('readonly', False)]})
     customer_parent = fields.Many2one('res.partner',string="Main Customer")
     project_name = fields.Many2one('res.partner.project',string="Project")
     po_number = fields.One2many('account.move.po','account_move_id',string="PO Number")
@@ -76,6 +80,50 @@ class AccountMoveInherited(models.Model):
     invoice_to = fields.Many2one('res.partner', inverse="inverse_invoice_to" ,compute='compute_invoice_to',string="Invoice To" )
     signed_by_ids= fields.Many2many('res.partner',compute='compute_signed_by_ids', string='Signed By IDS')
     signed_by = fields.Many2one('res.partner', string='Signed By')
+
+
+    @api.model_create_multi
+    def create(self, vals_list):
+
+        invoice_date = vals_list[0]["invoice_date"]
+        invoice_date = datetime.strptime(invoice_date, '%Y-%m-%d').date()
+        todays_date = datetime.strptime(str(date.today()), '%Y-%m-%d').date()
+        # _logger.info("Value List" + str(invoice_date))
+
+        if invoice_date < todays_date:
+            if self.env.user.has_group('lerm_civil_inv.kes_invocing_creation_backdate_group') :
+                pass
+            else:
+                raise UserError('You are Not allowed to create Invoice in Backdate')
+
+
+        # OVERRIDE
+        if any('state' in vals and vals.get('state') == 'posted' for vals in vals_list):
+            raise UserError('You cannot create a move already in the posted state. Please create a draft move and post it after.')
+
+        vals_list = self._move_autocomplete_invoice_lines_create(vals_list)
+        return super(AccountMoveInherited, self).create(vals_list)
+    
+
+    def write(self, vals):
+        if vals["invoice_date"]:
+            invoice_date = vals["invoice_date"]
+            invoice_date = datetime.strptime(invoice_date, '%Y-%m-%d').date()
+            todays_date = datetime.strptime(str(date.today()), '%Y-%m-%d').date()
+
+            # _logger.info(invoice_date)
+            # _logger.info(todays_date)
+            # _logger.info("Value List" + str(invoice_date))
+
+            if invoice_date < todays_date:
+                if self.env.user.has_group('lerm_civil_inv.kes_invocing_creation_backdate_group') :
+                    pass
+                else:
+                    raise UserError('You are Not allowed to create Invoice in Backdate')
+            _logger.info(vals)
+        super(AccountMoveInherited, self).write(vals)
+
+    
 
     @api.depends("partner_id")
     def compute_signed_by_ids(self):
