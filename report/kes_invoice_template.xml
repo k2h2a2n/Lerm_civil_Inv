@@ -142,6 +142,9 @@
                     <div>Rate (Rs.)</div>
                   </th>
                   <th>
+                    <div>Taxes</div>
+                  </th>
+                  <th>
                     <div>Amount (Rs.)</div>
                   </th>
                 </tr>
@@ -180,6 +183,11 @@
                   </td>
                   <td >
                     <div>
+                      <span t-field="productline.tax_ids"/>
+                    </div>
+                  </td>
+                  <td >
+                    <div>
                       <span t-field="productline.price_subtotal"/>
                     </div>
                   </td>
@@ -190,7 +198,7 @@
           <table class="table-wrapper">
             <tr>
               <td rowspan="1" colspan="12">
-                <div class="amountWords">Untaxed Amount :                                                                                                                               <![CDATA[&nbsp;]]>
+                <div class="amountWords">Amount :                                                                                                                               <![CDATA[&nbsp;]]>
                   <b>
                     <span t-esc="report_data['tax_totals']['formatted_amount_untaxed']"/>
                   </b>
@@ -205,7 +213,7 @@
                     <span t-esc="report_data['tax_totals']['groups_by_subtotal']['Untaxed Amount'][1]['formatted_tax_group_amount']"/>
                   </b>
                 </div>
-                <div class="amountWords">Amount chargeable :                                                                                                                               <![CDATA[&nbsp;]]>
+                <div class="amountWords">Total Amount :                                                                                                                               <![CDATA[&nbsp;]]>
                   <b>
                     <span t-esc="report_data['tax_totals']['formatted_amount_total']"/>
                   </b>
