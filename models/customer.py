@@ -106,21 +106,24 @@ class AccountMoveInherited(models.Model):
     
 
     def write(self, vals):
-        if vals["invoice_date"]:
-            invoice_date = vals["invoice_date"]
-            invoice_date = datetime.strptime(invoice_date, '%Y-%m-%d').date()
-            todays_date = datetime.strptime(str(date.today()), '%Y-%m-%d').date()
+         try:
+            if "invoice_date" in vals:
+                invoice_date = vals["invoice_date"]
+                invoice_date = datetime.strptime(invoice_date, '%Y-%m-%d').date()
+                todays_date = datetime.strptime(str(date.today()), '%Y-%m-%d').date()
 
-            # _logger.info(invoice_date)
-            # _logger.info(todays_date)
-            # _logger.info("Value List" + str(invoice_date))
+                # _logger.info(invoice_date)
+                # _logger.info(todays_date)
+                # _logger.info("Value List" + str(invoice_date))
 
-            if invoice_date < todays_date:
-                if self.env.user.has_group('lerm_civil_inv.kes_invocing_creation_backdate_group') :
-                    pass
-                else:
-                    raise UserError('You are Not allowed to create Invoice in Backdate')
-            _logger.info(vals)
+                if invoice_date < todays_date:
+                    if self.env.user.has_group('lerm_civil_inv.kes_invocing_creation_backdate_group') :
+                        pass
+                    else:
+                        raise UserError('You are Not allowed to create Invoice in Backdate')
+                _logger.info(vals)
+        except:
+            pass
         super(AccountMoveInherited, self).write(vals)
 
     
