@@ -17,6 +17,8 @@
                         <field name="projects" nolabel="1" >
                             <tree editable="bottom">
                                 <field name="project_name" />
+                                <field name="client_name" />
+                                <field name="consultant_name" />
                                 <field name="closed_boolean" />
                             </tree>
                         </field>
@@ -60,6 +62,7 @@
                 <xpath expr="//field[@name='payment_reference']" position="after">
                     <field name="project_ids" invisible="1" />
                     <field name="project_name"  domain="[('id', 'in', project_ids)]" />
+                    <field name="site_address"  domain="[('id', 'in', site_address_ids)]" />
                     <!-- <field name="project_name" attrs="{'readonly':[('partner_id','=',False)]}"/> -->
                     <!-- <field name='po_number' attrs="{'readonly':[('partner_id','=',False)]}"/> -->
                     <field name='customer_reference'/>
@@ -77,7 +80,11 @@
                         </field>
                     </page>
                 </xpath>
-
+                 <!-- <xpath expr="//field[@name='invoice_payment_term_id']" position="after">
+                    <field name="tds" />
+                    <field name="amount_after_tds" />
+                    <field name="tds_percentage" widget="percentage" />                
+                </xpath> -->
                 <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='product_id']" position="after">
                     <field name="report_no" />
                 </xpath>
@@ -102,7 +109,11 @@
                 </xpath>
                  <xpath expr="//field[@name='invoice_date']" position="after">
                     <field name="signed_by_ids" invisible="1"/>
+                    <field name="site_address_ids" invisible="1" />
                     <field name="signed_by" domain="[('id', 'in', signed_by_ids)]"  />
+                    <field name="tds" invisible="1"/>
+                    <field name="amount_after_tds" invisible="1" />
+                    <field name="tds_percentage" invisible="1" widget="percentage" />
                 </xpath>
                  <!-- <button name="action_invoice_sent"
                                 type="object"
@@ -111,21 +122,50 @@
                                 class="oe_highlight"
                                 data-hotkey="y"/> -->
                 <xpath expr="//header/button[4]" position="replace">
-                    <!-- <button name="action_invoice_sent_mail"
+                    <button name="action_invoice_sent_mail"
                                 type="object"
                                 string="Send"
                                 attrs="{'invisible':['|', '|', ('state', '!=', 'posted'), ('is_move_sent', '=', False), ('move_type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund'))]}"
-                                data-hotkey="y"/>                      -->
+                                data-hotkey="y"/>                     
                 </xpath>
                 <xpath expr="//header/button[3]" position="replace">
-                    <!-- <button name="action_invoice_sent_mail"
+                    <button name="action_invoice_sent_mail"
                                 type="object"
                                 string="Send"
                                 attrs="{'invisible':['|', '|', ('state', '!=', 'posted'), ('is_move_sent', '=', True), ('move_type', 'not in', ('out_invoice', 'out_refund'))]}"
                                 class="oe_highlight"
-                                data-hotkey="y"/>       -->
+                                data-hotkey="y"/>      
                 </xpath>
             </field>
         </record>
+
+        <record id="account_move_sale_inherited_tree_tds" model="ir.ui.view">
+            <field name="name">account.move.sale.inherited.tree.tds</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_invoice_tree"/>
+            <field name="arch" type="xml">
+            <xpath expr="//field[@name='amount_total_signed']" position="before">
+                <field name="tds" />
+                <field name="amount_after_tds" />
+                <field name="tds_percentage" string="TDS %" widget="percentage" />
+            </xpath>
+            </field>
+        </record>
+
+     <record id="view_account_payment_register_form_inherit_tds" model="ir.ui.view">
+        <field name="name">account.payment.register.form.inherit.tds</field>
+        <field name="model">account.payment.register</field>
+        <field name="inherit_id" ref="account.view_account_payment_register_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='communication']" position="after">
+                <field name="tds" />
+                <field name="amount_after_tds" />
+                <field name="tds_percentage" widget="percentage" />
+            </xpath>
+
+        </field>
+    </record>
+
+
     </data>
 </odoo>

@@ -33,8 +33,8 @@ class Customer(models.Model):
     def _compute_res_type(self):
         selection = [
             ('contact', 'Contact'),
-            ('delivery', 'Delivery Address'),
-            ('other', 'Other Address'),
+            ('delivery', 'Site Address'),
+            ('other', 'Billing Address'),
             ("private", "Private Address"),
                     ]
         return selection
@@ -50,6 +50,8 @@ class CustomerProject(models.Model):
 
     contact_id = fields.Many2one('res.partner',string="Contact ID")
     project_name = fields.Char(string="Project Name")
+    client_name = fields.Char(string="Client Name")
+    consultant_name = fields.Char(string="Consultant Name")
     closed_boolean = fields.Boolean(string="Closed")
 
 
@@ -75,26 +77,35 @@ class AccountMoveInherited(models.Model):
     customer_reference = fields.Char(string="Customer Reference")
     contact_person = fields.Many2one('res.partner',string="Contact Person")
     contact_person_ids = fields.Many2many('res.partner',compute='compute_contact_person_ids',string='Partner ID')
+    site_address_ids = fields.Many2many('res.partner',compute='compute_contact_person_ids',string='Partner ID')
+    site_address = fields.Many2one('res.partner',string='Site Address')
     ids_partner = fields.Many2many('res.partner',compute='compute_ids', string='Partner ID')
     project_ids = fields.Many2many('res.partner.project',compute='compute_project_ids', string='Projects ID')
     invoice_to = fields.Many2one('res.partner', inverse="inverse_invoice_to" ,compute='compute_invoice_to',string="Invoice To" )
     signed_by_ids= fields.Many2many('res.partner',compute='compute_signed_by_ids', string='Signed By IDS')
     signed_by = fields.Many2one('res.partner', string='Signed By')
-
+    tds = fields.Monetary(currency_field='currency_id',string="TDS")
+    amount_after_tds = fields.Monetary(currency_field='currency_id',string="Amount After TDS")
+    tds_percentage = fields.Float("TDS")
 
     @api.model_create_multi
     def create(self, vals_list):
 
-        invoice_date = vals_list[0]["invoice_date"]
-        invoice_date = datetime.strptime(invoice_date, '%Y-%m-%d').date()
-        todays_date = datetime.strptime(str(date.today()), '%Y-%m-%d').date()
-        # _logger.info("Value List" + str(invoice_date))
+        try:
+            _logger.info(datetime.today())
+            last_invoice_date = self.env["account.move"].search([])[-1].invoice_date
+            invoice_date = vals_list[0]["invoice_date"]
+            invoice_date = datetime.strptime(invoice_date, '%Y-%m-%d').date()
+            last_invoice_date = datetime.strptime(str(last_invoice_date), '%Y-%m-%d').date()
+            # _logger.info("Value List" + str(invoice_date))
 
-        if invoice_date < todays_date:
-            if self.env.user.has_group('lerm_civil_inv.kes_invocing_creation_backdate_group') :
-                pass
-            else:
-                raise UserError('You are Not allowed to create Invoice in Backdate')
+            if invoice_date <= last_invoice_date:
+                if self.env.user.has_group('lerm_civil_inv.kes_invocing_creation_backdate_group') :
+                    pass
+                else:
+                    raise UserError('You are Not allowed to create Invoice in Backdate')
+        except:
+            pass
 
 
         # OVERRIDE
@@ -106,17 +117,18 @@ class AccountMoveInherited(models.Model):
     
 
     def write(self, vals):
-         try:
+        try:
             if "invoice_date" in vals:
+                last_invoice_date = self.env["account.move"].search([])[-1].invoice_date
                 invoice_date = vals["invoice_date"]
                 invoice_date = datetime.strptime(invoice_date, '%Y-%m-%d').date()
-                todays_date = datetime.strptime(str(date.today()), '%Y-%m-%d').date()
+                last_invoice_date = datetime.strptime(str(last_invoice_date), '%Y-%m-%d').date()
 
                 # _logger.info(invoice_date)
                 # _logger.info(todays_date)
                 # _logger.info("Value List" + str(invoice_date))
 
-                if invoice_date < todays_date:
+                if invoice_date <= last_invoice_date:
                     if self.env.user.has_group('lerm_civil_inv.kes_invocing_creation_backdate_group') :
                         pass
                     else:
@@ -134,6 +146,8 @@ class AccountMoveInherited(models.Model):
             contact_id = self.env.ref('base.main_partner').id
             signed_by_ids = self.env['res.partner'].search([('parent_id', '=', contact_id),('type','=','contact')])
             rec.signed_by_ids = signed_by_ids
+            # site_address_ids = self.env['res.partner'].search([('parent_id', '=', contact_id),('type','=','delivery')])
+            # rec.site_address_ids = signed_by_ids
 
 
     def action_invoice_sent_mail(self):
@@ -226,8 +240,11 @@ class AccountMoveInherited(models.Model):
             if rec.partner_id:
                 contact_person_ids = self.env['res.partner'].search([('parent_id', '=', rec.partner_id.id),('type','=','contact')])
                 rec.contact_person_ids = contact_person_ids
+                site_address_ids = self.env['res.partner'].search([('parent_id', '=', rec.partner_id.id),('type','=','delivery')])
+                rec.site_address_ids = site_address_ids
             else:
                 rec.contact_person_ids = []
+                rec.site_address_ids = []
 
     
 
@@ -290,3 +307,30 @@ class AccountMovePO(models.Model):
 class AccountMoveLineInherited(models.Model):
     _inherit = 'account.move.line'
     report_no = fields.Char('Report No')
+
+
+
+class AccountPaymentRegisterInherited(models.TransientModel):
+    _inherit = 'account.payment.register'
+    tds = fields.Monetary(currency_field='currency_id',string="TDS")
+    amount_after_tds = fields.Monetary(currency_field='currency_id',compute="_compute_tds",string="Amount After TDS")
+    tds_percentage = fields.Float("TDS")
+
+
+    def action_create_payments(self):
+
+        active_id = self.env.context['active_id']
+        _logger.info(active_id)
+        _logger.info(self.env.context)
+        self.env["account.move"].search([("id","=",active_id)],limit=1).write({"tds":self.tds , "amount_after_tds":self.amount_after_tds , "tds_percentage": self.tds_percentage})
+
+        super(AccountPaymentRegisterInherited,self).action_create_payments()
+
+        
+
+    @api.depends("tds","amount")
+    def _compute_tds(self):
+        for rec in self:
+            rec.amount_after_tds = rec.amount - rec.tds
+            rec.tds_percentage = (rec.amount_after_tds/rec.amount)
+            # _logger.info(self.env.context['active_ids'][0])
