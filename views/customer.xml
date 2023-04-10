@@ -161,7 +161,33 @@
             <xpath expr="//field[@name='communication']" position="after">
                 <field name="tds" />
                 <field name="amount_after_tds" />
+                <field name="total_amount_signed" invisible="1" />
                 <field name="tds_percentage" widget="percentage" />
+            </xpath>
+
+        </field>
+    </record>
+
+
+    <record id="product_pricelist_inherited_items" model="ir.ui.view">
+        <field name="name">product.pricelist.item.inherited.comment</field>
+        <field name="model">product.pricelist.item</field>
+        <field name="inherit_id" ref="product.product_pricelist_item_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='min_quantity']" position="after">
+                <field name="comment"/>
+            </xpath>
+
+        </field>
+    </record>
+
+     <record id="product_pricelist_inherited_form" model="ir.ui.view">
+        <field name="name">product.pricelist.inherited.comment</field>
+        <field name="model">product.pricelist</field>
+        <field name="inherit_id" ref="product.product_pricelist_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='price']" position="after">
+                <field name="comment"/>
             </xpath>
 
         </field>
