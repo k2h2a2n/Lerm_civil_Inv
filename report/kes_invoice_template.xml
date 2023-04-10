@@ -55,17 +55,13 @@
                 </div>
               </td>
               <td colspan="6" class="halfWidth">
-                <div>PO No                                                                                                                                                                   <![CDATA[&nbsp;]]> :                                                                                                                                                                   <![CDATA[&nbsp;]]><![CDATA[&nbsp;]]>
-                  <span t-foreach="o.po_number[:-1]" t-as="p">
-                    <span t-field="p.po_number"/>
-                    <span t-if="o.po_number and len(o.po_number) &gt; 1"><![CDATA[&nbsp;]]> ,                                                                                                                                                                                                       <![CDATA[&nbsp;]]></span>
-                  </span>
-                  <span t-if="o.po_number" t-esc="o.po_number[-1].po_number.po_number"/>
+                <div>Customer Reference                                                                                                                                                 <![CDATA[&nbsp;]]>:                                                                                                                                                <![CDATA[&nbsp;]]>
+                  <span t-field="o.customer_reference"/>
                 </div>
               </td>
             </tr>
             <tr>
-              <td rowspan="1" colspan="12">
+              <td rowspan="1" colspan="6">
                 <div>Customer                                                                                                                                                 <![CDATA[&nbsp;]]>:                                                                                                                                                <![CDATA[&nbsp;]]>
                   <span t-field="o.partner_id.name"/>
                 </div>
@@ -92,6 +88,15 @@
                   <span t-field="o.partner_id.country_id"/>
                 </div>
               </td>
+              <td rowspan="1" colspan="6">
+                <div>PO No                                                                                                                                                                   <![CDATA[&nbsp;]]> :                                                                                                                                                                   <![CDATA[&nbsp;]]><![CDATA[&nbsp;]]>
+                  <span t-foreach="o.po_number[:-1]" t-as="p">
+                    <span t-field="p.po_number"/>
+                    <span t-if="o.po_number and len(o.po_number) &gt; 1"><![CDATA[&nbsp;]]> ,                                                                                                                                                                                                       <![CDATA[&nbsp;]]></span>
+                  </span>
+                  <span t-if="o.po_number" t-esc="o.po_number[-1].po_number.po_number"/>
+                </div>
+              </td>
             </tr>
             <tr>
               <td rowspan="1" colspan="6">
@@ -104,8 +109,30 @@
                 </div>
               </td>
               <td rowspan="1" colspan="6">
-                <div>Customer Reference                                                                                                                                                 <![CDATA[&nbsp;]]>:                                                                                                                                                <![CDATA[&nbsp;]]>
-                  <span t-field="o.customer_reference"/>
+                <div>Site Address                                                                                                                                                  <![CDATA[&nbsp;]]>:                                                                                                                                                <![CDATA[&nbsp;]]>
+                  <span t-field="o.site_address.name"/>
+                </div>
+                <div>
+                  <span t-if="o.site_address.street">
+                    <span t-field="o.site_address.street"/>
+ ,
+                  </span>
+                  <span t-if="o.site_address.street2">
+                    <span t-field="o.site_address.street2"/>
+ ,
+                  </span>
+                  <span t-if="o.site_address.city">
+                    <span t-field="o.site_address.city"/>
+ ,
+                  </span>
+                  <span t-if="o.site_address.zip">
+                    <span t-field="o.site_address.zip"/>
+                  </span>
+                </div>
+                <div>
+                  <span t-field="o.site_address.state_id"/>
+, 
+                  <span t-field="o.site_address.country_id"/>
                 </div>
               </td>
             </tr>
