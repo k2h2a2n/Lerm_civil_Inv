@@ -111,6 +111,7 @@ class AccountMoveInherited(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
 
+       
         try:
             _logger.info(datetime.today())
             last_invoice_date = self.env["account.move"].search([])[-1].invoice_date
