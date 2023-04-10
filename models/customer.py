@@ -111,6 +111,7 @@ class AccountMoveInherited(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
 
+       
         try:
             _logger.info(datetime.today())
             last_invoice_date = self.env["account.move"].search([])[-1].invoice_date
@@ -328,6 +329,11 @@ class AccountMoveLineInherited(models.Model):
     _inherit = 'account.move.line'
     report_no = fields.Char('Report No')
 
+
+
+class PriceListInherited(models.Model):
+    _inherit = 'product.pricelist.item'
+    comment = fields.Text("Comment")
 
 
 class AccountPaymentRegisterInherited(models.TransientModel):
