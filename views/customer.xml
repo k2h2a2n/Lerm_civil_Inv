@@ -161,6 +161,7 @@
             <xpath expr="//field[@name='communication']" position="after">
                 <field name="tds" />
                 <field name="amount_after_tds" />
+                <field name="total_amount_signed" invisible="1" />
                 <field name="tds_percentage" widget="percentage" />
             </xpath>
 

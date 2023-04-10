@@ -88,6 +88,26 @@ class AccountMoveInherited(models.Model):
     amount_after_tds = fields.Monetary(currency_field='currency_id',string="Amount After TDS")
     tds_percentage = fields.Float("TDS")
 
+
+    def action_register_payment(self):
+        ''' Open the account.payment.register wizard to pay the selected journal entries.
+        :return: An action opening the account.payment.register wizard.
+        '''
+
+        
+        return {
+            'name': 'Register Payment',
+            'res_model': 'account.payment.register',
+            'view_mode': 'form',
+            'context': {
+                'active_model': 'account.move',
+                'active_ids': self.ids,
+                'default_total_amount_signed': self.amount_total_signed
+            },
+            'target': 'new',
+            'type': 'ir.actions.act_window',
+        }
+
     @api.model_create_multi
     def create(self, vals_list):
 
@@ -313,6 +333,7 @@ class AccountMoveLineInherited(models.Model):
 class AccountPaymentRegisterInherited(models.TransientModel):
     _inherit = 'account.payment.register'
     tds = fields.Monetary(currency_field='currency_id',string="TDS")
+    total_amount_signed = fields.Monetary(currency_field='currency_id',string="Amount Total")
     amount_after_tds = fields.Monetary(currency_field='currency_id',compute="_compute_tds",string="Amount After TDS")
     tds_percentage = fields.Float("TDS")
 
@@ -328,9 +349,10 @@ class AccountPaymentRegisterInherited(models.TransientModel):
 
         
 
-    @api.depends("tds","amount")
+    @api.depends("tds","total_amount_signed")
     def _compute_tds(self):
         for rec in self:
-            rec.amount_after_tds = rec.amount - rec.tds
-            rec.tds_percentage = (rec.amount_after_tds/rec.amount)
+            rec.amount_after_tds = rec.total_amount_signed - rec.tds
+            rec.tds_percentage = (rec.tds/rec.total_amount_signed)
+            
             # _logger.info(self.env.context['active_ids'][0])
