@@ -12,7 +12,7 @@ class Customer(models.Model):
 
     pan_no = fields.Char(string="PAN No")
     msme_reg_no = fields.Char(string="MSME REG No.")
-    consultant = fields.Char(string="Consultant")
+    consultant = fields.Char(string="Client")
     quality_manager = fields.Char(string="Quality Manager")
     quality_manager_no = fields.Char(string="Quality Manager Number")    
     projects  = fields.One2many('res.partner.project','contact_id', string="Projects" )
