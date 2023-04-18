@@ -59,10 +59,12 @@
             <field name="model">account.move</field>
             <field name="inherit_id" ref="account.view_move_form"/>
             <field name="arch" type="xml">
+                <!-- <xpath expr="//field[@name='payment_reference']" position="after">
+                
+                </xpath> -->
                 <xpath expr="//field[@name='payment_reference']" position="after">
                     <field name="site_address_ids" invisible="1" />
-                    <field name="project_ids" invisible="1" />
-                    <field name="project_name"  domain="[('id', 'in', project_ids)]" />
+
                     <field name="site_address"  domain="[('id', 'in', site_address_ids)]" />
                     <!-- <field name="project_name" attrs="{'readonly':[('partner_id','=',False)]}"/> -->
                     <!-- <field name='po_number' attrs="{'readonly':[('partner_id','=',False)]}"/> -->
@@ -106,6 +108,8 @@
                
                 <xpath expr="//field[@name='partner_shipping_id']" position="after">
                     <field name="ids_partner" invisible="1"/>
+                    <field name="project_ids" invisible="1" />
+                    <field name="project_name"  domain="[('id', 'in', project_ids)]" />
                     <field name="invoice_to"  />
                 </xpath>
                  <xpath expr="//field[@name='invoice_date']" position="after">
