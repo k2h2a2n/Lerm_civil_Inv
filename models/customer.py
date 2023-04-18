@@ -40,7 +40,25 @@ class Customer(models.Model):
         return selection
 
 
-    # vat = fields.Char(string="GSTIN")
+    def name_get(self):
+        res = []
+        for partner in self:
+            print("saa" + str(self.env.context.get('hide_reference')))
+     
+
+            if not self.env.context.get('hide_reference'):
+                name = partner._get_name()
+                print("name" + str(name))
+                res.append((partner.id, name))
+                return res
+
+            else:
+                name = partner._get_name().split(",")[1].strip()
+                print("name" + str(name))
+                res.append((partner.id, name))
+                return res
+            
+
 
 
 

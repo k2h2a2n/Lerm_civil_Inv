@@ -68,7 +68,7 @@
                     <!-- <field name='po_number' attrs="{'readonly':[('partner_id','=',False)]}"/> -->
                     <field name='customer_reference'/>
                     <field name="contact_person_ids" invisible="1" />
-                    <field name='contact_person' domain="[('id', 'in', contact_person_ids)]"/>
+                    <field name='contact_person' context="{'hide_reference':True}" domain="[('id', 'in', contact_person_ids)]"/>
 
                 </xpath>
                 <xpath expr="//page[@name='other_info']" position="after">
