@@ -368,7 +368,7 @@
                     <span t-field="c.vat"/>
                   </div>
                    <div>
-                    <label>MSME REG NO.</label>
+                    <label style="min-width: 100px;">MSME REG NO.</label>
                     <![CDATA[&nbsp;]]>
                     <span>:</span><![CDATA[&nbsp;]]>
                     <span t-field="c.msme_reg_no"/> <![CDATA[&nbsp;]]>
@@ -383,7 +383,7 @@
                 </div>
               </td> -->
               
-              <td style="position: relative;">
+              <td colspan="6" style="position: relative;min-width: 250px;">
                 <div style="min-height:60px">
                   <b> Signature </b>
                 </div>
