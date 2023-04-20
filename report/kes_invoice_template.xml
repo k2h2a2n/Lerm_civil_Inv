@@ -361,12 +361,16 @@
                     <span>:</span><![CDATA[&nbsp;]]>
                     <span t-field="c.sac_code"/>
                   </div>
+                </div>
+                <div>
                   <div>
                     <label>GST No.</label>
                     <![CDATA[&nbsp;]]>
                     <span>:</span><![CDATA[&nbsp;]]>
                     <span t-field="c.vat"/>
                   </div>
+                </div>
+                <div style="margin-top: 22px">
                    <div>
                     <label style="min-width: 100px;">MSME REG NO.</label>
                     <![CDATA[&nbsp;]]>
@@ -383,14 +387,14 @@
                 </div>
               </td> -->
               
-              <td colspan="6" style="position: relative;min-width: 330px;">
-                <div style="min-height:110px">
+              <td colspan="6" style="position: relative;min-width: 330px;height:250px">
+                <div style="min-height:172px">
                   <b> Signature </b>
                 </div>
-                <div style="min-height:60px">
+                <div style="min-height:25px">
                   <b> Receiver's Name </b>
                 </div>
-                <div style="min-height:40px">
+                <div style="min-height:20px">
                   <b> Mobile No. </b>
                 </div>
                 <div class="eoe">
