@@ -384,13 +384,13 @@
               </td> -->
               
               <td colspan="6" style="position: relative;min-width: 330px;">
-                <div style="min-height:70px">
+                <div style="min-height:110px">
                   <b> Signature </b>
                 </div>
-                <div style="min-height:70px">
+                <div style="min-height:60px">
                   <b> Receiver's Name </b>
                 </div>
-                <div style="min-height:70px">
+                <div style="min-height:40px">
                   <b> Mobile No. </b>
                 </div>
                 <div class="eoe">
