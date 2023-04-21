@@ -9,6 +9,7 @@
         'views/customer.xml',
         'report/kes_invoice_action.xml',
         'report/kes_invoice_template.xml',
+        'report/kes_invoice_template_without_header.xml',
         'security/security.xml',
         'security/ir.model.access.csv'
     ],
