@@ -246,7 +246,7 @@
               </table>
             </td>
           </tr>
-          <table class="table-wrapper" style="page-break-inside: avoid;">
+          <table class="table-wrapper">
             <tr>
               <td rowspan="1" colspan="12">
                 <div class="amountWords">Amount :
