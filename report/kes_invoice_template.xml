@@ -199,10 +199,12 @@
                     <div>Amount (Rs.)</div>
                   </th>
                 </tr>
+                <t t-set="i" t-value="0"/>
                 <tr t-foreach="o.invoice_line_ids" t-as="productline" t-if="productline.product_id">
                   <td >
                     <div>
-                      <span t-esc="productline_index + 1" />
+                      <span t-esc="i + 1" />
+                      <t t-set="i" t-value="i+1"/>
                     </div>
                   </td>
                   <td>
