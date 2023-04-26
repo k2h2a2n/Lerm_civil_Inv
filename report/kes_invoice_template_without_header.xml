@@ -2,6 +2,9 @@
 <odoo>
   <template id="kes_custom_invoice_no_header">
     <t t-call="web.html_container">
+    <head>
+      <link rel="stylesheet" type="text/scss" href="/lerm_civil_inv/static/src/css/kes_invoice.scss" />
+    </head>
       <t t-call="web.internal_layout">
         <div t-foreach="data" t-as="o" class="container_kes">
           <table>

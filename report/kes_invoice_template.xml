@@ -200,7 +200,7 @@
                   </th>
                 </tr>
                 <tr t-foreach="o.invoice_line_ids" t-as="productline" t-if="productline.product_id">
-                  <td >
+                  <td>
                     <div>
                       <span t-esc="productline_index + 1" />
                     </div>
