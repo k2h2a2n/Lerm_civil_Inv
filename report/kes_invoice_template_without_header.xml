@@ -5,7 +5,7 @@
     <head>
       <link rel="stylesheet" type="text/scss" href="/lerm_civil_inv/static/src/css/kes_invoice.scss" />
     </head>
-      <t t-call="web.internal_layout">
+      <t t-call="web.basic_layout">
         <div t-foreach="data" t-as="o" class="container_kes">
           <table>
             <tr>
@@ -251,7 +251,11 @@
               </table>
             </td>
           </tr>
+<<<<<<< HEAD
           <table >
+=======
+          <table>
+>>>>>>> 28fd1a6ef842711fc029ff2c601156dfae0ac07a
             <tr>
               <td rowspan="1" colspan="12">
                 <div class="amountWords">Amount :

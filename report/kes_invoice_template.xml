@@ -248,7 +248,11 @@
               </table>
             </td>
           </tr>
+<<<<<<< HEAD
           <table >
+=======
+          <table>
+>>>>>>> 28fd1a6ef842711fc029ff2c601156dfae0ac07a
             <tr>
               <td rowspan="1" colspan="12">
                 <div class="amountWords">Amount :
