@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <template id="kes_custom_invoice">
+  <template id="kes_custom_invoice_no_header">
     <t t-call="web.html_container">
-      <t t-call="web.external_layout">
+    <head>
+      <link rel="stylesheet" type="text/scss" href="/lerm_civil_inv/static/src/css/kes_invoice.scss" />
+    </head>
+      <t t-call="web.internal_layout">
         <div t-foreach="data" t-as="o" class="container_kes">
           <table>
             <tr>
@@ -201,7 +204,7 @@
                 </tr>
                 <t t-set="i" t-value="0"/>
                 <tr t-foreach="o.invoice_line_ids" t-as="productline" t-if="productline.product_id">
-                  <td>
+                  <td >
                     <div>
                       <span t-esc="i + 1" />
                       <t t-set="i" t-value="i+1"/>
@@ -462,4 +465,4 @@
       </t>
     </t>
   </template>
-</odoo> 
+</odoo>

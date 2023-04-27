@@ -98,7 +98,16 @@ class AccountMoveInherited(models.Model):
     tds = fields.Monetary(currency_field='currency_id',string="TDS")
     amount_after_tds = fields.Monetary(currency_field='currency_id',string="Amount After TDS")
     tds_percentage = fields.Float("TDS")
+    gstr_no = fields.Char("GSTR No",compute="compute_gstr")
+    vendor_bill_date = fields.Date("Vendor Bill Date")
+    place_of_supply = fields.Char("Place of Supply")
+    gstr_claim_date = fields.Date("GSTR Claim Date")
 
+
+    @api.depends("partner_id")
+    def compute_gstr(self):
+        for record in self:
+            record.gstr_no = record.partner_id.vat
 
     def action_register_payment(self):
         ''' Open the account.payment.register wizard to pay the selected journal entries.

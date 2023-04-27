@@ -90,8 +90,12 @@
                     <field name="tds_percentage" widget="percentage" />                
                 </xpath> -->
                 <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='product_id']" position="after">
-                    <field name="report_no" />
+                    <field name="report_no"  attrs="{'column_invisible': [('parent.move_type', 'not in', ('out_invoice', 'out_refund', 'out_receipt'))]}"  />
                 </xpath>
+                <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='name']" position="replace">
+                    <field name="name"  attrs="{'column_invisible': [('parent.move_type', 'not in', ('out_invoice', 'out_refund', 'out_receipt'))]}"  />
+                </xpath>
+                
                 <xpath expr="//field[@name='line_ids']/tree/field[@name='account_id']" position="after">
                     <field name="report_no" />
                 </xpath>
@@ -99,6 +103,17 @@
             </field>
         </record>
 
+        <record id="base_kit_inherited" model="ir.ui.view">
+            <field name="name">account.move.inherited.form.category</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="base_accounting_kit.view_invoice_asset_category"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='asset_category_id'][1]" position="replace">
+                    <field string="Asset Category" attrs="{'column_invisible': [('parent.move_type', 'not in', ('out_invoice', 'out_refund', 'out_receipt'))]}"
+                        name="asset_category_id" domain="[('type','=','purchase')]" context="{'default_type':'purchase'}"/>
+                </xpath>
+            </field>
+        </record>
 
         <record id="account_move_sale_inherited_form" model="ir.ui.view">
             <field name="name">account.move.sale.inherited.form</field>
@@ -114,6 +129,11 @@
                     <field name="invoice_to"  />
                 </xpath>
                  <xpath expr="//field[@name='invoice_date']" position="after">
+                    <field name="gstr_no"  attrs="{'invisible': [('move_type', 'not in', ('in_invoice', 'in_refund', 'in_receipt'))]}" />
+                    <field name="vendor_bill_date"  attrs="{'invisible': [('move_type', 'not in', ('in_invoice', 'in_refund', 'in_receipt'))]}" />
+                    <field name="place_of_supply"  attrs="{'invisible': [('move_type', 'not in', ('in_invoice', 'in_refund', 'in_receipt'))]}" />
+                    <field name="gstr_claim_date"  attrs="{'invisible': [('move_type', 'not in', ('in_invoice', 'in_refund', 'in_receipt'))]}" />
+
                     <field name="signed_by_ids" invisible="1"/>
                     <field name="signed_by" domain="[('id', 'in', signed_by_ids)]"  />
                     <field name="tds" invisible="1"/>
@@ -121,6 +141,10 @@
                     <field name="tds_percentage" invisible="1" widget="percentage" />
                     <!-- <field name="site_address_ids" invisible="1" /> -->
                 </xpath>
+
+                 <!-- attrs="{'invisible': [('move_type', 'not in', ('in_invoice', 'in_refund', 'in_receipt'))]}" -->
+
+
                  <!-- <button name="action_invoice_sent"
                                 type="object"
                                 string="Send"
@@ -151,6 +175,8 @@
             <field name="inherit_id" ref="account.view_invoice_tree"/>
             <field name="arch" type="xml">
             <xpath expr="//field[@name='amount_total_signed']" position="before">
+                <field name="gstr_claim_date" optional="show" />
+                <field name="place_of_supply" optional="show" />
                 <field name="tds" />
                 <field name="amount_after_tds" />
                 <field name="tds_percentage" string="TDS %" widget="percentage" />
