@@ -248,7 +248,7 @@
               </table>
             </td>
           </tr>
-          <table class="table-wrapper">
+          <table>
             <tr>
               <td rowspan="1" colspan="12">
                 <div class="amountWords">Amount :
