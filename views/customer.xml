@@ -12,6 +12,9 @@
                     <field name="quality_manager"/>
                     <field name="quality_manager_no"/>
                 </xpath>
+                <xpath expr="//field[@name='vat']" position="attributes">
+                    <attribute name="string">GST</attribute>
+                </xpath>
                 <xpath expr="//page[@name='internal_notes']" position="after">
                     <page string="Projects">
                         <field name="projects" nolabel="1" >
@@ -214,13 +217,28 @@
         <field name="model">product.pricelist</field>
         <field name="inherit_id" ref="product.product_pricelist_view"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='price']" position="after">
+            <xpath expr="//field[@name='fixed_price']" position="after">
                 <field name="comment"/>
             </xpath>
 
         </field>
     </record>
 
+
+    
+    <record id="l10n_in_view_gst_form" model="ir.ui.view">
+        <field name="name">l10n.in.gst.inherited</field>
+        <field name="model">res.partner</field>
+        <field name="priority" eval="90"/>
+        <field name="inherit_id" ref="l10n_in.l10n_in_view_partner_form"/>
+        <field name="arch" type="xml">
+
+        <xpath expr="//field[@name='vat']" position="attributes">
+                    <attribute name="string">GST</attribute>
+        </xpath>
+            
+        </field>
+    </record>
 
     </data>
 </odoo>
