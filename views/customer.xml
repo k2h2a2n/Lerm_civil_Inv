@@ -103,7 +103,7 @@
             </field>
         </record>
 
-        <!-- <record id="base_kit_inherited" model="ir.ui.view">
+        <record id="base_kit_inherited" model="ir.ui.view">
             <field name="name">account.move.inherited.form.category</field>
             <field name="model">account.move</field>
             <field name="inherit_id" ref="base_accounting_kit.view_invoice_asset_category"/>
@@ -113,7 +113,7 @@
                         name="asset_category_id" domain="[('type','=','purchase')]" context="{'default_type':'purchase'}"/>
                 </xpath>
             </field>
-        </record> -->
+        </record>
 
         <record id="account_move_sale_inherited_form" model="ir.ui.view">
             <field name="name">account.move.sale.inherited.form</field>
@@ -212,7 +212,7 @@
         </field>
     </record>
 
-     <!-- <record id="product_pricelist_inherited_form" model="ir.ui.view">
+     <record id="product_pricelist_inherited_form" model="ir.ui.view">
         <field name="name">product.pricelist.inherited.comment</field>
         <field name="model">product.pricelist</field>
         <field name="inherit_id" ref="product.product_pricelist_view"/>
@@ -222,7 +222,7 @@
             </xpath>
 
         </field>
-    </record> -->
+    </record>
 
 
     
