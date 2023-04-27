@@ -2,6 +2,9 @@
 <odoo>
   <template id="kes_custom_invoice_no_header">
     <t t-call="web.html_container">
+    <head>
+      <link rel="stylesheet" type="text/scss" href="/lerm_civil_inv/static/src/css/kes_invoice.scss" />
+    </head>
       <t t-call="web.internal_layout">
         <div t-foreach="data" t-as="o" class="container_kes">
           <table>
@@ -199,10 +202,12 @@
                     <div>Amount (Rs.)</div>
                   </th>
                 </tr>
+                <t t-set="i" t-value="0"/>
                 <tr t-foreach="o.invoice_line_ids" t-as="productline" t-if="productline.product_id">
                   <td >
                     <div>
-                      <span t-esc="productline_index + 1" />
+                      <span t-esc="i + 1" />
+                      <t t-set="i" t-value="i+1"/>
                     </div>
                   </td>
                   <td>
@@ -246,7 +251,7 @@
               </table>
             </td>
           </tr>
-          <table class="table-wrapper">
+          <table >
             <tr>
               <td rowspan="1" colspan="12">
                 <div class="amountWords">Amount :
