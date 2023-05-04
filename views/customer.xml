@@ -35,7 +35,8 @@
                         <field name="po_numbers" nolabel="1" >
                             <tree editable="bottom">
                                 <field name="po_number" />
-                                <field name="closed_boolean" />                                
+                                <field name="closed_boolean" /> 
+                                <field name="document"/>                               
                             </tree>
                         </field>
                     </page>
@@ -74,14 +75,17 @@
                     <field name='contact_person' context="{'hide_reference':True}" domain="[('id', 'in', contact_person_ids)]"/>
 
                 </xpath>
+
+                <xpath expr="//field[@name='pricelist_id']" position="after">
+                    <field name="property_supplier_payment_term_id" />
+                </xpath>
+
                 <xpath expr="//page[@name='other_info']" position="after">
                     <page string="PO Number">
                         <field name="po_number" attrs="{'readonly':[('partner_id','=',False)]}" context="{'default_customer' : partner_id }" nolabel="1" >
                             <tree editable="bottom">
                                 <field name="customer" invisible="1"  />
                                 <field name="po_number" />
-                                <!-- <field name="document" filename="filename"/>
-                                <field name="filename" invisible="1"/> -->
                             </tree>
                         </field>
                     </page>
@@ -214,12 +218,12 @@
         </field>
     </record>
 
-     <record id="product_pricelist_inherited_form" model="ir.ui.view">
+     <record id="product_pricelist_inherited_comment" model="ir.ui.view">
         <field name="name">product.pricelist.inherited.comment</field>
         <field name="model">product.pricelist</field>
         <field name="inherit_id" ref="product.product_pricelist_view"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='fixed_price']" position="after">
+            <xpath expr="//field[@name='price']" position="after">
                 <field name="comment"/>
             </xpath>
 

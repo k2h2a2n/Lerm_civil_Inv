@@ -73,6 +73,7 @@ class CustomerPO(models.Model):
     contact_id = fields.Many2one('res.partner',string="Contact ID")
     po_number = fields.Char(string="PO Number")
     closed_boolean = fields.Boolean(string="Closed")
+    document = fields.Binary(string="Document")
 
     # vat = fields.Char(string="GSTIN")
 
@@ -102,6 +103,14 @@ class AccountMoveInherited(models.Model):
     vendor_bill_date = fields.Date("Vendor Bill Date")
     place_of_supply = fields.Char("Place of Supply")
     gstr_claim_date = fields.Date("GSTR Claim Date")
+    property_supplier_payment_term_id = fields.Many2one('account.payment.term',string="Payment Terms")
+
+    @api.onchange('partner_id')
+    def compute_payment_terms(self):
+        for record in self:
+            payment_term = self.env['res.partner'].search([('id', '=', record.partner_id.id)]).property_supplier_payment_term_id
+            record.property_supplier_payment_term_id = payment_term
+
 
 
     @api.depends("partner_id")
@@ -306,16 +315,7 @@ class AccountMovePO(models.Model):
     account_move_id = fields.Many2one('account.move',string='Account Move ID')
     customer = fields.Many2one('res.partner',string='Customer')
     po_number = fields.Many2one('res.partner.po',required=True,string="PO Number")
-    # document = fields.Binary(string="Document")
-    # filename = fields.Char()
-
-
-    @api.constrains('document', 'filename')
-    def get_data(self):
-        if not self.filename.endswith('.pdf'):     # check if file pdf
-            raise ValidationError('your error message')
-        else:
-            pass
+    
 
     @api.onchange("customer")
     def set_domain_for_po_number(self):
