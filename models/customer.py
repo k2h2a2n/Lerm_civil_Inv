@@ -306,6 +306,16 @@ class AccountMovePO(models.Model):
     account_move_id = fields.Many2one('account.move',string='Account Move ID')
     customer = fields.Many2one('res.partner',string='Customer')
     po_number = fields.Many2one('res.partner.po',required=True,string="PO Number")
+    # document = fields.Binary(string="Document")
+    # filename = fields.Char()
+
+
+    @api.constrains('document', 'filename')
+    def get_data(self):
+        if not self.filename.endswith('.pdf'):     # check if file pdf
+            raise ValidationError('your error message')
+        else:
+            pass
 
     @api.onchange("customer")
     def set_domain_for_po_number(self):

@@ -80,6 +80,8 @@
                             <tree editable="bottom">
                                 <field name="customer" invisible="1"  />
                                 <field name="po_number" />
+                                <!-- <field name="document" filename="filename"/>
+                                <field name="filename" invisible="1"/> -->
                             </tree>
                         </field>
                     </page>
