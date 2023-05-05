@@ -172,6 +172,15 @@
                 </div>
               </td>
             </tr>
+            <tr>
+              <td colspan="12">
+                <div>Payment Terms
+                  <![CDATA[&nbsp;]]> :
+                  <![CDATA[&nbsp;]]>
+                  <span t-field="o.invoice_payment_term_id"/>
+                </div>
+              </td>
+            </tr>
           </table>
           <tr>
             <td colspan="12">

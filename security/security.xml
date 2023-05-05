@@ -15,5 +15,10 @@
             <field name="name">Invocing Backdate Creation</field>
             <field name="category_id" ref="kes_invocing_access_category"/>
         </record>
+
+        <!-- <record model="res.groups" id="kes_invocing_access_group">
+            <field name="name">Invocing</field>
+            <field name="category_id" ref="kes_invocing_access_category"/>
+        </record> -->
     </data>
 </odoo>  

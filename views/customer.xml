@@ -35,7 +35,8 @@
                         <field name="po_numbers" nolabel="1" >
                             <tree editable="bottom">
                                 <field name="po_number" />
-                                <field name="closed_boolean" />                                
+                                <field name="closed_boolean" /> 
+                                <field name="document"/>                               
                             </tree>
                         </field>
                     </page>
@@ -57,6 +58,18 @@
         </record>
 
 
+        <record id="account_move_inherited_tree" model="ir.ui.view">
+            <field name="name">account.out.invoice.tree.inherited</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_out_invoice_tree"/>
+            <field name="arch" type="xml">
+           
+                <xpath expr="//field[@name='gstr_claim_date']" position="before">
+                    <field name="gstr_no"/>
+                </xpath>
+            </field>
+        </record>
+
         <record id="account_move_inherited_form" model="ir.ui.view">
             <field name="name">account.move.inherited.form</field>
             <field name="model">account.move</field>
@@ -74,6 +87,8 @@
                     <field name='contact_person' context="{'hide_reference':True}" domain="[('id', 'in', contact_person_ids)]"/>
 
                 </xpath>
+
+
                 <xpath expr="//page[@name='other_info']" position="after">
                     <page string="PO Number">
                         <field name="po_number" attrs="{'readonly':[('partner_id','=',False)]}" context="{'default_customer' : partner_id }" nolabel="1" >
@@ -129,7 +144,8 @@
                     <field name="invoice_to"  />
                 </xpath>
                  <xpath expr="//field[@name='invoice_date']" position="after">
-                    <field name="gstr_no"  attrs="{'invisible': [('move_type', 'not in', ('in_invoice', 'in_refund', 'in_receipt'))]}" />
+                    <!-- <field name="property_supplier_payment_term_id"  /> -->
+                    <field name="gstr_no" />
                     <field name="vendor_bill_date"  attrs="{'invisible': [('move_type', 'not in', ('in_invoice', 'in_refund', 'in_receipt'))]}" />
                     <field name="place_of_supply"  attrs="{'invisible': [('move_type', 'not in', ('in_invoice', 'in_refund', 'in_receipt'))]}" />
                     <field name="gstr_claim_date"  attrs="{'invisible': [('move_type', 'not in', ('in_invoice', 'in_refund', 'in_receipt'))]}" />
