@@ -147,7 +147,7 @@
                     <field name="invoice_to"  />
                 </xpath>
                  <xpath expr="//field[@name='invoice_date']" position="after">
-                    <field name="gstr_no"  attrs="{'invisible': [('move_type', 'not in', ('in_invoice', 'in_refund', 'in_receipt'))]}" />
+                    <field name="gstr_no" />
                     <field name="vendor_bill_date"  attrs="{'invisible': [('move_type', 'not in', ('in_invoice', 'in_refund', 'in_receipt'))]}" />
                     <field name="place_of_supply"  attrs="{'invisible': [('move_type', 'not in', ('in_invoice', 'in_refund', 'in_receipt'))]}" />
                     <field name="gstr_claim_date"  attrs="{'invisible': [('move_type', 'not in', ('in_invoice', 'in_refund', 'in_receipt'))]}" />
