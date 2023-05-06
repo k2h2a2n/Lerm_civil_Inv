@@ -108,7 +108,7 @@ class AccountMoveInherited(models.Model):
     @api.onchange('partner_id')
     def compute_payment_terms(self):
         for record in self:
-            payment_term = self.env['res.partner'].search([('id', '=', record.partner_id.id)]).property_supplier_payment_term_id
+            payment_term = self.env['res.partner'].search([('id', '=', record.partner_id.id)]).property_supplier_payment_term_id.id
             record.property_supplier_payment_term_id = payment_term
 
 
