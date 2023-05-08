@@ -174,7 +174,7 @@
                 <div>Payment Terms
                   <![CDATA[&nbsp;]]> :
                   <![CDATA[&nbsp;]]>
-                  <span t-field="o.property_supplier_payment_term_id"/>
+                  <span t-field="o.invoice_payment_term_id"/>
                 </div>
               </td>
             </tr>
