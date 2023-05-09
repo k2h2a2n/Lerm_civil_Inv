@@ -246,6 +246,7 @@
                     </t>
                   </td>
                   <td>
+                  
                     <div>
                       <span t-field="productline.quantity"/>
                     </div>
