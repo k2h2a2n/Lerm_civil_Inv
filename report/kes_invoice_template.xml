@@ -222,10 +222,27 @@
                     </div>
                   </td>
                   <td>
-                    <t t-if="productline.report_no">
-                      <div t-foreach="productline.report_no.split(',')" t-as="value">
+                    <!-- <t t-if="productline.report_no">
+                      <span t-foreach="productline.report_no.split(',')[0:3]" t-as="value">
+                        <span t-esc="value"/> 
+                      </span>
+                      <div t-foreach="productline.report_no.split(',')[3:]" t-as="value">
                         <span t-esc="value"/>
                       </div>
+                    </t> -->
+                    <t t-if="productline.report_no">
+                      <t t-set="split_data" t-value="productline.report_no.split(',')"/>
+                      <t t-set="data_length" t-value="len(split_data or [])"/>
+                      <t t-foreach="range(0, data_length, 3)" t-as="index">
+                        <t t-set="end_index" t-value="index + 3 if index + 3 &lt; data_length else data_length"/>
+                        <t t-foreach="split_data[index:end_index]" t-as="value">
+                          <span t-esc="value"/> 
+                          <t t-if="value != split_data[end_index-1]">
+                              ,
+                          </t>
+                        </t>
+                        <br/>
+                      </t>
                     </t>
                   </td>
                   <td>
