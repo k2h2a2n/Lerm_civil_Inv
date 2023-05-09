@@ -74,6 +74,7 @@ class CustomerPO(models.Model):
     po_number = fields.Char(string="PO Number")
     closed_boolean = fields.Boolean(string="Closed")
     document = fields.Binary(string="Document")
+    document_name = fields.Char(string="Document Name")
 
     # vat = fields.Char(string="GSTIN")
 

@@ -36,7 +36,8 @@
                             <tree editable="bottom">
                                 <field name="po_number" />
                                 <field name="closed_boolean" /> 
-                                <field name="document"/>                               
+                                <field name="document" filename="document_name"/>  
+                                <field name="document_name" invisible='1' />                             
                             </tree>
                         </field>
                     </page>
