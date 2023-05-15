@@ -36,7 +36,7 @@
                             <tree editable="bottom">
                                 <field name="po_number" />
                                 <field name="closed_boolean" /> 
-                                <field name="document" widget='binary' filename="document_name"/>  
+                                <field name="document" widget='binary' filename="document_name" max_upload_size="1048576"/>  
                                 <field name="document_name" invisible='1' />                             
                             </tree>
                         </field>
