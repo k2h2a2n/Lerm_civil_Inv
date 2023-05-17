@@ -3,9 +3,10 @@
   <template id="kes_custom_invoice_no_header">
     <t t-call="web.html_container">
       <t t-call="web.basic_layout">
-        <div class="imageContainer">
+      <div class="maincontent">
+        <!-- <div class="imageContainer">
           <img t-attf-src="/lerm_civil_inv/static/src/img/letterHead.jpg" class="company_logo" alt="Image"/>
-        </div>
+        </div> -->
         <div t-foreach="data" t-as="o" class="container_kes">
           <table>
             <tr>
@@ -486,6 +487,7 @@
             </tr>
           </table>
         </div>
+      </div>
       </t>
     </t>
   </template>
