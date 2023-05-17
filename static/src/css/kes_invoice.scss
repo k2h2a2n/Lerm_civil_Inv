@@ -85,8 +85,14 @@
 
 
 .imageContainer {
+  top:10px;
   img{
     width:100%
   }
   /* Additional CSS properties for positioning, size, etc. */
+}
+
+.maincontent {
+  position: absolute !important;
+  top:8 !important;
 }
