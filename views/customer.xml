@@ -58,17 +58,7 @@
         </record>
 
 
-        <record id="account_move_inherited_tree" model="ir.ui.view">
-            <field name="name">account.out.invoice.tree.inherited</field>
-            <field name="model">account.move</field>
-            <field name="inherit_id" ref="account.view_out_invoice_tree"/>
-            <field name="arch" type="xml">
-           
-                <xpath expr="//field[@name='gstr_claim_date']" position="before">
-                    <field name="gstr_no"/>
-                </xpath>
-            </field>
-        </record>
+        
 
         <record id="account_move_inherited_form" model="ir.ui.view">
             <field name="name">account.move.inherited.form</field>
@@ -228,7 +218,7 @@
         </field>
     </record>
 
-     <record id="product_pricelist_inherited_comment" model="ir.ui.view">
+    <record id="product_pricelist_inherited_comment" model="ir.ui.view">
         <field name="name">product.pricelist.inherited.comment</field>
         <field name="model">product.pricelist</field>
         <field name="inherit_id" ref="product.product_pricelist_view"/>
@@ -255,6 +245,18 @@
             
         </field>
     </record>
+
+    <record id="account_move_inherited_tree" model="ir.ui.view">
+            <field name="name">account.out.invoice.tree.inherited</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_out_invoice_tree"/>
+            <field name="arch" type="xml">
+           
+                <xpath expr="//field[@name='gstr_claim_date']" position="before">
+                    <field name="gstr_no"/>
+                </xpath>
+            </field>
+        </record>
 
     </data>
 </odoo>
