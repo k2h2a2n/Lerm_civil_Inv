@@ -5,7 +5,7 @@
       th{
         font-weight: 500;
         text-align: left;
-        font-size: 11px;
+        font-size: 13px;
       }
     }
     // tr{
@@ -14,14 +14,14 @@
     table, th, td {
       border: 1px solid black;
       border-collapse: collapse;
-      font-size: 11px;
+      font-size: 13px;
       padding: 5px;
       vertical-align: top;
     }
     
     div{
       padding: 2px 4px;
-      font-size: 11px;
+      font-size: 13px;
     }
 }
 
@@ -90,9 +90,4 @@
     width:100%
   }
   /* Additional CSS properties for positioning, size, etc. */
-}
-
-.maincontent {
-  position: absolute !important;
-  top:8 !important;
 }

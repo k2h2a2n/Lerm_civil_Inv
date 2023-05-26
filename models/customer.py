@@ -36,7 +36,7 @@ class Customer(models.Model):
             ('delivery', 'Site Address'),
             ('other', 'Billing Address'),
             ("private", "Private Address"),
-                    ]
+            ]
         return selection
 
     @api.depends('partner')
