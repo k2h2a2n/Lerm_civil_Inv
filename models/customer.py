@@ -36,7 +36,7 @@ class Customer(models.Model):
             ('delivery', 'Site Address'),
             ('other', 'Billing Address'),
             ("private", "Private Address"),
-                    ]
+            ]
         return selection
 
     @api.depends('partner')
@@ -237,8 +237,6 @@ class AccountMoveInherited(models.Model):
             'target': 'new',
             'context': ctx
         }
-
-
 
     @api.depends("partner_id")
     def compute_invoice_to(self):
