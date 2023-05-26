@@ -238,8 +238,6 @@ class AccountMoveInherited(models.Model):
             'context': ctx
         }
 
-
-
     @api.depends("partner_id")
     def compute_invoice_to(self):
         for rec in self:
