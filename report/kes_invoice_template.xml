@@ -1,10 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
+   <template id="custom_layout_header_footer">
+        <div t-attf-class="header article" t-att-style="report_header_style">
+			<div class="row">
+				<div class="col-12 imageContainer" >
+					<img t-attf-src="/lerm_civil_inv/static/src/img/kes_letterHead.jpg" alt="Image"/>
+				</div>
+			</div>
+        </div>
+        <div t-attf-class="article" t-att-style="report_header_style">
+            <t t-out="0"/>
+        </div>
+		<div t-attf-class="footer o_standard_footer">
+            <div class="text-center" style="border-top: 1px solid black;">
+                <ul class="list-inline mb4">
+                    <div class="footertext">
+						Regd. Office: Shop No. 3, Building B1, Wadala Truck Terminal, MMRDA Compound, Antop Hill, Mumbai - 400037, Tel.: +91 22 2401 0040 Chemical Testing Department : Shramjivan Bldg., B-5, Office No. 109, First Floor, Wadala Truck Terminal, Mumbai - 400037.
+					</div>
+					<div class="footertext">
+						Email : sales@knackengineeringservices.com <![CDATA[&nbsp;]]><![CDATA[&nbsp;]]> Website :  www.knackengineeringservices.com 
+					</div>
+					<div class="footertext">
+						CIN No.: U45209MH2017PTC291168
+					</div>
+                </ul>
+                <div t-if="report_type == 'pdf'" class="footertext">
+                    Page: <span class="page"/> / <span class="topage"/>
+                </div>
+            </div>
+        </div>
+	</template>
   <template id="kes_custom_invoice">
     <t t-call="web.html_container">
-      <t t-call="web.external_layout">
+      <!-- <t t-call="web.basic_layout"> -->
+      <t t-call="lerm_civil_inv.custom_layout_header_footer">
+
         <div t-foreach="data" t-as="o" class="container_kes">
-          <table>
+          <!-- <div class="imageContainer">
+              <img t-attf-src="/lerm_civil_inv/static/src/img/letterHead.jpg" class="company_logo" alt="Image"/>
+          </div> -->
+          <table style="margin-top:25px">
             <tr>
               <td rowspan="1" colspan="12">
                 <div class="centerText">
@@ -20,7 +56,7 @@
               </td>
             </tr>
             <tr>
-              <td colspan="6">Invoice No :
+              <td colspan="6"><span t-field="o.move_type"/> <![CDATA[&nbsp;]]>:
                 <![CDATA[&nbsp;]]>
                 <span t-field="o.name"/>
               </td>
@@ -300,6 +336,17 @@
                     <span t-esc="report_data['tax_totals']['groups_by_subtotal']['Untaxed Amount'][1]['formatted_tax_group_amount']"/>
                   </b>
                 </div>
+                <t t-foreach="o.invoice_line_ids" t-as="product">
+                  <t t-if="product.product_id">
+                    <!-- Code for rows where product_id is present -->
+                  </t>
+                  <t t-else="">
+                      <div class="amountWords">
+                          <span t-field="product.name"/><![CDATA[&nbsp;]]>:
+                          <![CDATA[&nbsp;]]><b><span t-field="product.price_subtotal"/></b>
+                      </div>
+                  </t>
+                </t>
                 <div class="amountWords">Total Amount :
                   <![CDATA[&nbsp;]]>
                   <b>
@@ -491,13 +538,13 @@
   </template>
 
   <template id="external_layout_header" inherit_id="web.external_layout_standard">
-    <xpath expr="//div[contains(@class, 'row')]" position="replace">
+    <!-- <xpath expr="//div[contains(@class, 'row')]" position="replace">
       
     </xpath>
     <xpath expr="//div[contains(@t-attf-class, 'header')]" position="inside">
       <div class="imageContainer" >
           <img t-attf-src="/lerm_civil_inv/static/src/img/letterHead.jpg" alt="Image"/>
       </div>
-    </xpath>
+    </xpath> -->
   </template>
 </odoo> 
