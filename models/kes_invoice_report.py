@@ -15,10 +15,18 @@ class KesCustomInvoiceReport(models.AbstractModel):
         tax_totals = json.loads(tax_totals_json)
         # Pass the tax_totals to the report context
         report_data = {'tax_totals': tax_totals}
+        amount_total = 0
+        for i in docs1:
+            for product in i.invoice_line_ids:
+                if product.product_id:
+                    amount_total = amount_total + product.price_subtotal
+                else:
+                    print('no product id found')
 
         return {
               'doc_ids': docids,
               'doc_model': 'account.move',
+              'total_amount_line' : amount_total,
               'data': docs1,
               'report_data': report_data,
         }
@@ -37,10 +45,18 @@ class KesCustomInvoiceReportWithoutHeader(models.AbstractModel):
         tax_totals = json.loads(tax_totals_json)
         # Pass the tax_totals to the report context
         report_data = {'tax_totals': tax_totals}
+        amount_total = 0
+        for i in docs1:
+            for product in i.invoice_line_ids:
+                if product.product_id:
+                    amount_total = amount_total + product.price_subtotal
+                else:
+                    print('no product id found')
 
         return {
               'doc_ids': docids,
               'doc_model': 'account.move',
+              'total_amount_line' : amount_total,
               'data': docs1,
               'report_data': report_data,
         }

@@ -181,6 +181,9 @@
             <field name="model">account.move</field>
             <field name="inherit_id" ref="account.view_invoice_tree"/>
             <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="multi_edit">1</attribute>
+            </xpath>
             <xpath expr="//field[@name='amount_total_signed']" position="before">
                 <field name="gstr_claim_date" optional="show" />
                 <field name="place_of_supply" optional="show" />

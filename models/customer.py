@@ -34,7 +34,7 @@ class Customer(models.Model):
         selection = [
             ('contact', 'Contact'),
             ('delivery', 'Site Address'),
-            ('other', 'Billing Address'),
+            ('other', 'Delivery Address'),
             ("private", "Private Address"),
             ]
         return selection
