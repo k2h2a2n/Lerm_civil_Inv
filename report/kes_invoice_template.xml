@@ -45,9 +45,14 @@
           <tr>
             <td rowspan="1" colspan="12">
               <div class="centerText">
-                <div>
-                  <b>TAX INVOICE</b>
-                </div>
+                 <t t-if="'RINV' in o.name">
+                    <div>
+                      <b>TAX INVOICE/CREDIT NOTE</b>
+                    </div>
+                  </t>
+                    <div t-else="">
+                      <b>TAX INVOICE</b>
+                    </div>
                 <div>
                   <span>(U/S of CGST Act
                                           <![CDATA[&]]> SGST Acts R. W.Sec of IGST Acts)

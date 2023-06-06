@@ -12,7 +12,12 @@
             <tr>
               <td rowspan="1" colspan="12">
                 <div class="centerText">
-                  <div>
+                  <t t-if="'RINV' in o.name">
+                    <div>
+                      <b>TAX INVOICE/CREDIT NOTE</b>
+                    </div>
+                  </t>
+                  <div t-else="">
                     <b>TAX INVOICE</b>
                   </div>
                   <div>
