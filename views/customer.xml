@@ -96,6 +96,7 @@
                     <field name="tds_percentage" widget="percentage" />                
                 </xpath> -->
                 <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='product_id']" position="after">
+                    <field name="pricelist_id" invisible="1"/>
                     <field name="report_no"  attrs="{'column_invisible': [('parent.move_type', 'not in', ('out_invoice', 'out_refund', 'out_receipt'))]}"  />
                 </xpath>
                 <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='name']" position="replace">
@@ -105,6 +106,9 @@
                 <xpath expr="//field[@name='line_ids']/tree/field[@name='account_id']" position="after">
                     <field name="report_no" />
                 </xpath>
+                <!-- <xpath expr="//field[@name='invoice_line_ids']" position="attributes">
+                    <attribute name="context">{'default_pricelist_id': pricelist_id ,'default_move_type': context.get('default_move_type'), 'journal_id': journal_id, 'default_partner_id': commercial_partner_id, 'default_currency_id': currency_id or company_currency_id}</attribute>
+                </xpath> -->
                 
             </field>
         </record>
