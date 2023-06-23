@@ -13,7 +13,7 @@
                         <field name="invoiced"/>
                     </group>
                     <group>
-                        <!-- <field name="kes_no"/> -->
+                        <field name="kes_no"/>
                         <field name="pricelist"/>
                     </group>
                 </group>
