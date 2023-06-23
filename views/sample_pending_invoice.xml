@@ -8,7 +8,7 @@
             <form>
                 <group>
                     <group>
-                        <!-- <field name="srf_id"/> -->
+                        <field name="srf_id"/>
                         <field name="customer"/>
                         <field name="invoiced"/>
                     </group>
