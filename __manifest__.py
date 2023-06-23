@@ -4,11 +4,9 @@
  'website': "http://www.esehat.org", 
  'category': 'Uncategorized', 
  'version': '13.0.1', 
- 'depends':['base' ,'sale','lerm_civil', 'contacts','account','product', 'web','l10n_in','base_account_budget','account_invoice_pricelist','base_accounting_kit'],
+ 'depends':['base' ,'sale', 'contacts','account','product', 'web','l10n_in','base_account_budget','account_invoice_pricelist','base_accounting_kit'],
  'data': [
-        'views/menu.xml',
         'views/customer.xml',
-        'views/sample_pending_invoice.xml',
         'report/kes_invoice_action.xml',
         'report/kes_invoice_template.xml',
         'report/kes_invoice_template_without_header.xml',
