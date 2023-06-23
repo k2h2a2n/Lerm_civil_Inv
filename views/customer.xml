@@ -36,7 +36,7 @@
                             <tree editable="bottom">
                                 <field name="po_number" />
                                 <field name="closed_boolean" /> 
-                                <field name="document" widget='binary' filename="document_name"/>  
+                                <field name="document" widget='binary' filename="document_name" max_upload_size="1048576"/>  
                                 <field name="document_name" invisible='1' />                             
                             </tree>
                         </field>
@@ -59,17 +59,7 @@
         </record>
 
 
-        <record id="account_move_inherited_tree" model="ir.ui.view">
-            <field name="name">account.out.invoice.tree.inherited</field>
-            <field name="model">account.move</field>
-            <field name="inherit_id" ref="account.view_out_invoice_tree"/>
-            <field name="arch" type="xml">
-           
-                <xpath expr="//field[@name='gstr_claim_date']" position="before">
-                    <field name="gstr_no"/>
-                </xpath>
-            </field>
-        </record>
+        
 
         <record id="account_move_inherited_form" model="ir.ui.view">
             <field name="name">account.move.inherited.form</field>
@@ -106,6 +96,7 @@
                     <field name="tds_percentage" widget="percentage" />                
                 </xpath> -->
                 <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='product_id']" position="after">
+                    <field name="pricelist_id" invisible="1"/>
                     <field name="report_no"  attrs="{'column_invisible': [('parent.move_type', 'not in', ('out_invoice', 'out_refund', 'out_receipt'))]}"  />
                 </xpath>
                 <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='name']" position="replace">
@@ -115,6 +106,9 @@
                 <xpath expr="//field[@name='line_ids']/tree/field[@name='account_id']" position="after">
                     <field name="report_no" />
                 </xpath>
+                <!-- <xpath expr="//field[@name='invoice_line_ids']" position="attributes">
+                    <attribute name="context">{'default_pricelist_id': pricelist_id ,'default_move_type': context.get('default_move_type'), 'journal_id': journal_id, 'default_partner_id': commercial_partner_id, 'default_currency_id': currency_id or company_currency_id}</attribute>
+                </xpath> -->
                 
             </field>
         </record>
@@ -191,6 +185,9 @@
             <field name="model">account.move</field>
             <field name="inherit_id" ref="account.view_invoice_tree"/>
             <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="multi_edit">1</attribute>
+            </xpath>
             <xpath expr="//field[@name='amount_total_signed']" position="before">
                 <field name="gstr_claim_date" optional="show" />
                 <field name="place_of_supply" optional="show" />
@@ -229,7 +226,7 @@
         </field>
     </record>
 
-     <record id="product_pricelist_inherited_comment" model="ir.ui.view">
+    <record id="product_pricelist_inherited_comment" model="ir.ui.view">
         <field name="name">product.pricelist.inherited.comment</field>
         <field name="model">product.pricelist</field>
         <field name="inherit_id" ref="product.product_pricelist_view"/>
@@ -256,6 +253,18 @@
             
         </field>
     </record>
+
+    <record id="account_move_inherited_tree" model="ir.ui.view">
+            <field name="name">account.out.invoice.tree.inherited</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_out_invoice_tree"/>
+            <field name="arch" type="xml">
+           
+                <xpath expr="//field[@name='gstr_claim_date']" position="before">
+                    <field name="gstr_no"/>
+                </xpath>
+            </field>
+        </record>
 
     </data>
 </odoo>

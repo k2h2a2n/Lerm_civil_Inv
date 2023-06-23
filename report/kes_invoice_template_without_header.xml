@@ -3,15 +3,21 @@
   <template id="kes_custom_invoice_no_header">
     <t t-call="web.html_container">
       <t t-call="web.basic_layout">
-        <div class="imageContainer">
+      <div class="maincontent margin">
+        <!-- <div class="imageContainer">
           <img t-attf-src="/lerm_civil_inv/static/src/img/letterHead.jpg" class="company_logo" alt="Image"/>
-        </div>
+        </div> -->
         <div t-foreach="data" t-as="o" class="container_kes">
           <table>
             <tr>
               <td rowspan="1" colspan="12">
                 <div class="centerText">
-                  <div>
+                  <t t-if="'RINV' in o.name">
+                    <div>
+                      <b>TAX INVOICE/CREDIT NOTE</b>
+                    </div>
+                  </t>
+                  <div t-else="">
                     <b>TAX INVOICE</b>
                   </div>
                   <div>
@@ -23,7 +29,7 @@
               </td>
             </tr>
             <tr>
-              <td colspan="6">Invoice No :
+              <td colspan="6"><span t-field="o.move_type"/> <![CDATA[&nbsp;]]>:
                 <![CDATA[&nbsp;]]>
                 <span t-field="o.name"/>
               </td>
@@ -281,7 +287,8 @@
                 <div class="amountWords">Amount :
                   <![CDATA[&nbsp;]]>
                   <b>
-                    <span t-esc="report_data['tax_totals']['formatted_amount_untaxed']"/>
+                    <span t-esc="total_amount_line"/>
+                    <!-- <span t-esc="report_data['tax_totals']['formatted_amount_untaxed']"/> -->
                   </b>
                 </div>
                 <div class="amountWords">
@@ -300,6 +307,17 @@
                     <span t-esc="report_data['tax_totals']['groups_by_subtotal']['Untaxed Amount'][1]['formatted_tax_group_amount']"/>
                   </b>
                 </div>
+                <t t-foreach="o.invoice_line_ids" t-as="product">
+                  <t t-if="product.product_id">
+                    <!-- Code for rows where product_id is present -->
+                  </t>
+                  <t t-else="">
+                      <div class="amountWords">
+                          <span t-field="product.name"/><![CDATA[&nbsp;]]>:
+                          <![CDATA[&nbsp;]]><b><span t-field="product.price_subtotal"/></b>
+                      </div>
+                  </t>
+                </t>
                 <div class="amountWords">Total Amount :
                   <![CDATA[&nbsp;]]>
                   <b>
@@ -486,6 +504,7 @@
             </tr>
           </table>
         </div>
+      </div>
       </t>
     </t>
   </template>

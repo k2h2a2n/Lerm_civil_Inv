@@ -1,11 +1,11 @@
 .container_kes{
-
+  
   table{
       width: 100%;
       th{
         font-weight: 500;
         text-align: left;
-        font-size: 11px;
+        font-size: 13px;
       }
     }
     // tr{
@@ -14,14 +14,14 @@
     table, th, td {
       border: 1px solid black;
       border-collapse: collapse;
-      font-size: 11px;
+      font-size: 13px;
       padding: 5px;
       vertical-align: top;
     }
     
     div{
       padding: 2px 4px;
-      font-size: 11px;
+      font-size: 13px;
     }
 }
 
@@ -51,9 +51,7 @@
     display: grid;
     grid-template-columns: auto auto;
   }
-  .eoe{
-    position: absolute;bottom: 0;border-top: 1px solid;width: 92%;
-  }
+ 
   .dataTable{
     table{
       width:100% !important
@@ -85,8 +83,43 @@
 
 
 .imageContainer {
+
   img{
-    width:100%
+    height:115px;
+    width:100%;
   }
   /* Additional CSS properties for positioning, size, etc. */
+}
+
+.margin{
+  margin-top: 150px;
+}
+
+.page-break {
+  position: absolute !important;
+  top: 100px !important;
+}
+
+.test{
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.header1 {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+}
+
+.content {
+  margin-top: 100px;
+}
+
+.footertext{
+  font-size: 12px;
+}
+.eoe{
+  position: absolute;bottom: 0;border-top: 1px solid;width: 92%;
 }
