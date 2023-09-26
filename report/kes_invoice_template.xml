@@ -380,7 +380,7 @@
           </tr>
           <tr>
             <td rowspan="1" colspan="12">
-              <div class="amountWords"> Amount chargeable in INR (in words) :
+              <div class="amountWords"> Amount chargeable in <span t-esc="data.currency_id.name"/> (in words) :
                                   <![CDATA[&nbsp;]]>
                 <b>
                   <span t-esc="data.currency_id.amount_to_text(report_data['tax_totals']['amount_total'])"/>
