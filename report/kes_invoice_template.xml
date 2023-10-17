@@ -244,13 +244,13 @@
                   <div>Per No.</div>
                 </th>
                 <th>
-                  <div>Rate (Rs.)</div>
+                  <div>Rate (<span t-esc="data.currency_id.name"/>)</div>
                 </th>
                 <!-- <th>
                     <div>Taxes</div>
                   </th> -->
                 <th>
-                  <div>Amount (Rs.)</div>
+                  <div>Amount (<span t-esc="data.currency_id.name"/>)</div>
                 </th>
               </tr>
               <t t-set="i" t-value="0"/>
@@ -326,7 +326,9 @@
                                   <![CDATA[&nbsp;]]>
                 <b>
                   <!-- <span t-esc="report_data['tax_totals']['formatted_amount_untaxed']"/> -->
-                  <span t-esc="total_amount_line"/>
+                  <!-- <span t-esc="total_amount_line"/> -->
+                  <span t-esc= "round(total_amount_line , 2)"/>
+
                 </b>
               </div>
               <div t-if="report_data['tax_totals']['groups_by_subtotal']" class="amountWords">
