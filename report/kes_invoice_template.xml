@@ -45,19 +45,19 @@
           <tr>
             <td rowspan="1" colspan="12">
               <div class="centerText">
-                 <t t-if="'RINV' in o.name">
-                    <div>
-                      <b>TAX INVOICE/CREDIT NOTE</b>
-                    </div>
+                 <t t-if="o.name and 'RINV' in o.name">
+                      <div>
+                        <b>TAX INVOICE/CREDIT NOTE</b>
+                      </div>
                   </t>
-                    <div t-else="">
-                      <b>TAX INVOICE</b>
-                    </div>
-                <div>
-                  <span>(U/S of CGST Act
-                    <![CDATA[&]]> SGST Acts R. W.Sec of IGST Acts)
-                  </span>
-                </div>
+                  <div t-else="">
+                    <b>TAX INVOICE</b>
+                  </div>
+                  <div>
+                    <span>(U/S of CGST Act
+                      <![CDATA[&]]> SGST Acts R. W.Sec of IGST Acts)
+                    </span>
+                  </div>
               </div>
             </td>
           </tr>
@@ -244,13 +244,13 @@
                   <div>Per No.</div>
                 </th>
                 <th>
-                  <div>Rate (Rs.)</div>
+                  <div>Rate (<span t-esc="data.currency_id.name"/>)</div>
                 </th>
                 <!-- <th>
                     <div>Taxes</div>
                   </th> -->
                 <th>
-                  <div>Amount (Rs.)</div>
+                  <div>Amount (<span t-esc="data.currency_id.name"/>)</div>
                 </th>
               </tr>
               <t t-set="i" t-value="0"/>
@@ -336,17 +336,27 @@
                                   <![CDATA[&nbsp;]]>
                 <b>
                   <!-- <span t-esc="report_data['tax_totals']['formatted_amount_untaxed']"/> -->
-                  <span t-esc="total_amount_line"/>
+                  <!-- <span t-esc="total_amount_line"/> -->
+                  <span t-esc= "round(total_amount_line , 2)"/>
+
                 </b>
               </div>
-              <div class="amountWords">
-                <span t-esc="report_data['tax_totals']['groups_by_subtotal']['Untaxed Amount'][0]['tax_group_name']"/>
+              <div t-if="report_data['tax_totals']['groups_by_subtotal']" class="amountWords">
+                  <span t-esc="report_data['tax_totals']['groups_by_subtotal']['Untaxed Amount'][0]['tax_group_name']"/>
                       :
+<<<<<<< HEAD
                                   <![CDATA[&nbsp;]]>
                 <b>
                   <span t-esc="report_data['tax_totals']['groups_by_subtotal']['Untaxed Amount'][0]['formatted_tax_group_amount']"/>
                 </b>
               </div>
+=======
+                  <![CDATA[&nbsp;]]>
+                  <b>
+                    <span t-esc="report_data['tax_totals']['groups_by_subtotal']['Untaxed Amount'][0]['formatted_tax_group_amount']"/>
+                  </b>
+                </div>
+>>>>>>> d0744aa2c5470306334a37c7faa704d0d0501504
               <!-- <div class="amountWords">
                 <span t-esc="report_data['tax_totals']['groups_by_subtotal']['Untaxed Amount'][1]['tax_group_name']"/>
                       :
@@ -355,7 +365,11 @@
                   <span t-esc="report_data['tax_totals']['groups_by_subtotal']['Untaxed Amount'][1]['formatted_tax_group_amount']"/>
                 </b>
               </div> -->
+<<<<<<< HEAD
               <t t-if="len(report_data['tax_totals']['groups_by_subtotal']['Untaxed Amount']) > 1">
+=======
+              <t t-if="report_data['tax_totals']['groups_by_subtotal'] and len(report_data['tax_totals']['groups_by_subtotal']['Untaxed Amount']) > 1">
+>>>>>>> d0744aa2c5470306334a37c7faa704d0d0501504
                 <div class="amountWords">
                   <span t-esc="report_data['tax_totals']['groups_by_subtotal']['Untaxed Amount'][1]['tax_group_name']"/>
                   :
@@ -390,7 +404,7 @@
           </tr>
           <tr>
             <td rowspan="1" colspan="12">
-              <div class="amountWords"> Amount chargeable in INR (in words) :
+              <div class="amountWords"> Amount chargeable in <span t-esc="data.currency_id.name"/> (in words) :
                                   <![CDATA[&nbsp;]]>
                 <b>
                   <span t-esc="data.currency_id.amount_to_text(report_data['tax_totals']['amount_total'])"/>
