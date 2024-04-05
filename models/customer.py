@@ -356,9 +356,13 @@ class AccountMovePO(models.Model):
 
 class AccountMoveLineInherited(models.Model):
     _inherit = 'account.move.line'
-    report_no = fields.Char('Report No')
+    
+    report_no = fields.Char(string="Report No")
     pricelist_id = fields.Many2one("product.pricelist",string="Pricelist",compute='_compute_pricelist')
     product_id = fields.Many2one('product.product', string='Product', ondelete='restrict')
+    report_no1 = fields.Many2many("lerm.srf.sample", string="Report No"
+    )
+
 
     @api.onchange("pricelist_id")
     def onchange_pricelist_id(self):
